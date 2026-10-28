@@ -24,7 +24,7 @@ with a confidence level, and measure how low a mosaic fraction can be detected.
 3. Smooth log-ratios along genomic position; summarize per arm and per hotspot.
 4. (v0.2) Compute allelic imbalance at common heterozygous SNPs; combine
    with expression evidence.
-5. Annotate overlap with curated hotspot table (data/hotspots.tsv).
+5. Annotate overlap with curated hotspot table (data/hotspots.csv).
 
 ## Validation
 - Real data: public hPSC RNA-seq with known karyotype/array results
