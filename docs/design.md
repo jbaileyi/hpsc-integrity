@@ -97,3 +97,21 @@
   20-read filter; size not predicted.
 - Limitations: thresholds derived from the same five lines (in-sample); panel is 4 comparators from
   one study; CSES7 and HUES14 carry unexplained chr17 shifts that affect their 17q results.
+
+## Panel experiment: design and predictions (written BEFORE running)
+- Panels: A = the 4 other hESC lines (as before); B = all 12 other lines; C = diploid hESC lines + the
+  8 HiSeq lines (10-11 comparators); D = the 8 HiSeq lines only (pure platform mismatch: NextSeq 500,
+  ~85 bp vs HiSeq 2000, 101 bp; parthenogenetic/SWAP lines).
+- Test lines: real data = all five hESC lines; spike-in = CSES9, CSES7, HUES14 at full depth, 10 replicates.
+- Predictions:
+  1. C and B give fewer false weak calls than A, especially for CSES7 (line-specific deviations are
+     diluted in a larger median); trisomy values stay near 0.5.
+  2. D is worse than C if the platform shifts arm-level ratios. D matching C would mean platform mismatch
+     is tolerable and a public reference panel is feasible.
+  3. Detection limits stay near 0.3 (weak) and 0.5 (strong), set by the thresholds and the remaining
+     noise; a drop to 0.2/0.3 would need baseline noise to fall.
+- Decision rule (a judgment call): if C cuts false weak calls by roughly a third or more without hurting
+  trisomy detection, a reference panel becomes the recommended design; if D fails clearly, the panel must
+  be platform-matched.
+- Caveat: the HiSeq lines have no G-banding truth here; if some carry abnormalities, a median over many
+  lines is robust to a few, but I have not verified this.

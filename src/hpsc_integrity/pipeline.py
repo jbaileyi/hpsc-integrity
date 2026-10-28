@@ -1,4 +1,6 @@
 """End-to-end scoring: a gene-by-sample count table -> per-arm log2 ratios."""
+from pathlib import Path
+
 import pandas as pd
 
 from .annotation import CHROMS, assign_arms
@@ -58,3 +60,19 @@ def score_arms(counts: pd.DataFrame, genes: pd.DataFrame, arms: pd.DataFrame,
     ratio, offsets = remove_offset(ratio, genes["chrom"])
     table = arm_medians(ratio, assign_arms(genes, arms))
     return table.loc[_sorted_arms(table.index)], offsets, len(counts)
+
+
+def gene_counts_from_kallisto(quant_dirs: dict, tx: pd.DataFrame) -> pd.DataFrame:
+    """Sum kallisto est_counts over each gene's transcripts.
+
+    quant_dirs: {sample name: folder containing abundance.tsv}; tx: transcript table from
+    parse_cdna_headers. Only protein-coding genes on chr1-22, X, Y are kept (see docs/design.md).
+    """
+    keep = tx[tx["chrom"].isin(CHROMS) & (tx["gene_biotype"] == "protein_coding")]
+    tx_to_gene = keep.set_index("transcript_id")["gene_id"]
+    cols = {}
+    for name, folder in quant_dirs.items():
+        q = pd.read_csv(Path(folder) / "abundance.tsv", sep="\t", index_col=0)
+        gene = tx_to_gene.reindex(q.index)                 # NaN for transcripts we do not keep
+        cols[name] = q["est_counts"].groupby(gene).sum()   # NaN keys are dropped
+    return pd.DataFrame(cols)
