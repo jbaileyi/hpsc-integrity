@@ -1,1 +1,7 @@
 data/raw/
+data/annotation/
+data/sra/
+data/fastq/
+data/ref/
+data/index/
+data/quant/
