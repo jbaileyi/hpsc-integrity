@@ -51,3 +51,10 @@ Notes
 | CSES21 | SRR3501468 | 65,859,863 | 45,762,736 | 69.5 |
 | HUES14 | SRR3501469 | 45,162,849 | 35,928,017 | 79.6 |
 - CSES7 is the low outlier (50.7%). Cause not investigated; first suspect if its arm-level profile is noisy.
+
+## First expression profile (median-of-5 baseline, MIN_COUNTS=20, window=200 genes; no tuning)
+- CSES22 chr12 median +0.48 (trisomy 12 detected); CSES21 chr21 +0.43 (trisomy 21 detected).
+- Expected for one extra copy: log2(3/2) = 0.585; observed ~82% and ~74% of that.
+- HUES14 chr20: 0.00 (focal 20q11.21 not detected, as predicted beforehand).
+- Candidates to check, not findings: CSES7 chr17 +0.11, HUES14 chr17 -0.09, CSES21 chrX -0.12.
+- Caveat: with 5 lines the median baseline pins ~20% of values at exactly 0 (flat lines, sharp steps).
