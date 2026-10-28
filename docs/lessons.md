@@ -30,3 +30,42 @@
 - Cause (post hoc): the arithmetic gave the fraction where the EXPECTED ratio reaches the threshold
   (~50% detection), not 80%. Adding arm noise (SD ~0.06; 0.84 SD for 80% power) gives ~0.28 and
   ~0.42, matching the grid. Lesson: state the power level when predicting a limit.
+
+## Per-line heterogeneity in the simulation (depth 1.0 unless noted)
+- False 'high' calls per run on non-target arms: CSES7 0.58, CSES9 0.00, HUES14 0.00 (0.12 at 10% depth).
+  Pooled 0.2 per run is misleading. Probable source: CSES7 17p (0.199 in real run, 0.20 cutoff);
+  arm names not recorded in spikein_runs.csv, so unverified.
+- False 'possible' calls per run: CSES7 3.78, CSES9 2.05, HUES14 1.01 (about 10%, 5%, 3% of arms);
+  30-100% more at 10% depth.
+- 17q: CSES7 'detected' at f=0 (already a weak call at baseline); HUES14 needs 0.75 (baseline -0.17);
+  CSES9 needs 0.5 (baseline -0.07). Pooled 17q limit is not meaningful. Line- and arm-specific
+  baseline deviations shift the effective detection limit.
+- Depth 1.0 -> 0.1: genes used 13,165 -> 10,223; target arm genes 312 -> 244; detection limits unchanged.
+- Hypothesis recorded before checking: per-sample noise (robust SD of arm ratios) orders
+  CSES7 > CSES9 > HUES14.
+
+## Noise hypothesis result: robust SD does not explain the false calls
+- Robust SD of arm ratios (real run): CSES9 0.045, CSES7 0.051, CSES22 0.044, CSES21 0.066, HUES14 0.042.
+  Predicted order CSES7 > CSES9 > HUES14 held, but the spread among the three is ~20%, while false
+  weak calls differ ~3.7x (3.78 / 2.05 / 1.01 per run).
+- Simulated false weak calls equal the arms already flagged in the real run (CSES7 4, CSES9 2,
+  HUES14 1): fixed, line-specific arm deviations, not random noise. This is why depth hardly matters.
+  A robust SD ignores such outlier arms by design, so noise-scaled thresholds would not fix this.
+- Consequence: the false-call rate measured here is a property of these three lines and this 4-line
+  panel; it does not transfer to new samples. Independent data are needed.
+
+## Prediction before the comparator-subset test
+- CSES7 21q (-0.13) comes from CSES21's trisomy 21 in its comparator set: it should shrink toward 0
+  when CSES21 is dropped. CSES7 chr17 (+0.16/+0.20) is line-specific: it should persist in every subset
+  (or move only slightly when HUES14, whose 17q is -0.17, is dropped).
+
+## Result of the comparator-subset test (real data, 3-comparator subsets)
+- CSES7 21q: -0.13 (all 4) -> -0.08 when CSES21 (trisomy 21) is dropped: ~0.05 of the deficit comes from the
+  trisomic comparator; the rest (-0.08 to -0.20 across subsets) persists. Prediction partly supported.
+- CSES7 chr17: 17p 0.17-0.21, 17q 0.13-0.23 in every subset: line-specific. Prediction supported.
+- Opposite chr17 deviations amplify each other: dropping CSES7 moves CSES9 17p/17q -0.04/-0.07 -> 0.00/-0.02
+  and HUES14 17q -0.17 -> -0.13; dropping HUES14 lowers CSES7 17q 0.16 -> 0.13.
+- HUES14 17q stays -0.13 to -0.21 in every subset; CSES9 19p/20q stay +0.13/+0.18 and +0.14/+0.19.
+- A single line-arm value moves ~0.05-0.10 with comparator choice (panel-composition uncertainty).
+- Unexplained: whether CSES7 (up) and HUES14 (down) chr17 shifts are biology (e.g., low-level mosaicism that
+  G-banding and the allelic method could miss) or other line-to-line expression differences.
