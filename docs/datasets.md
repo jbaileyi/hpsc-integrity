@@ -75,3 +75,9 @@ Notes
 - Candidate false positives: CSES7 chr17 (both arms +0.16/+0.20), HUES14 17q -0.17, CSES21 18q -0.17.
   If expression ~ copy number, these imply ~25-33% subclones, which a 20-metaphase karyotype would
   almost certainly detect (number of metaphases scored here unknown).
+
+## Figure 3 check of chr17 (read by eye from the figure image)
+- CSES7 and HUES14 allelic traces are flat across chr17 (~1.3); no significant marks there.
+  Only red mark in CSES7 panel: start of chr1.
+- Caveat: the paper's own mixing test saw a 1/3 mixture as visible but not significant, so a 25-33%
+  subclone would be near the allelic method's limit too. Chr17 expression shifts remain unexplained.

@@ -55,3 +55,13 @@
   Evidence: all four diploid lines read -0.06 to -0.07 on chr12 because the trisomic line is
   in their comparator set.
 - Back-of-envelope whole-chromosome detection limit from this null: ~25-30% mosaic. NOT a result.
+
+## Arm-level null and provisional call tiers
+- Arms with >= 50 protein-coding genes (MIN_ARM_GENES = 50, provisional); X and Y excluded in v0.1.
+- Null (39 arms x 5 lines minus 3 trisomic entries = 192): SD 0.060, 95th pct |x| 0.122, max 0.199.
+- Provisional tiers: |log2| >= 0.20 high; 0.12-0.20 possible; < 0.12 no call. To be recalibrated
+  on simulation, not on the five real lines.
+- Back-of-envelope detectable mosaic fraction (assumes 91% attenuation holds for partial mosaics):
+  ~20% at 0.12, ~33% at 0.20.
+- 20q11.21 band (21 genes incl. BCL2L1) is not callable by expression; allelic method needed.
+- TODO (me): confirm or change thresholds and write the reasoning in my own words.
