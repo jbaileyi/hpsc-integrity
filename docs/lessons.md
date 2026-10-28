@@ -23,3 +23,10 @@
 - Same direction and size as real data (diploid lines -0.06 to -0.07 on chr12 when CSES22 trisomic).
 - Cause: with 4 comparators, one abnormal sample shifts the median. Estimator property, not a data quirk.
 - Mitigations to test in simulation: larger reference panel; two-pass baseline excluding flagged samples.
+
+## Spike-in simulation: my back-of-envelope prediction was optimistic
+- Predicted detection limits (full depth): ~20% mosaic for any call, ~33% for 'high'.
+- Observed (80% detection): 0.30 and 0.50 on the grid (steps 0.2/0.3/0.5); 17q worse (0.75).
+- Cause (post hoc): the arithmetic gave the fraction where the EXPECTED ratio reaches the threshold
+  (~50% detection), not 80%. Adding arm noise (SD ~0.06; 0.84 SD for 80% power) gives ~0.28 and
+  ~0.42, matching the grid. Lesson: state the power level when predicting a limit.
