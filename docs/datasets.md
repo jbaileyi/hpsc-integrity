@@ -41,3 +41,13 @@ Notes
 - All five panels appear to be XY: no X-status test possible here.
 - Expectation written BEFORE running: arm-level expression calls should find chr12 (CSES22) and
   probably chr21 (CSES21); HUES14 focal 20q11.21 is expected to be a miss.
+
+## kallisto quantification (Ensembl 112, -l 200 -s 20)
+| Line | Run | Reads processed | Pseudoaligned | % |
+|---|---|---|---|---|
+| CSES9 | SRR3501465 | 34,372,963 | 26,439,916 | 76.9 |
+| CSES7 | SRR3501466 | 38,449,904 | 19,481,278 | 50.7 |
+| CSES22 | SRR3501467 | 45,666,767 | 37,615,635 | 82.4 |
+| CSES21 | SRR3501468 | 65,859,863 | 45,762,736 | 69.5 |
+| HUES14 | SRR3501469 | 45,162,849 | 35,928,017 | 79.6 |
+- CSES7 is the low outlier (50.7%). Cause not investigated; first suspect if its arm-level profile is noisy.
