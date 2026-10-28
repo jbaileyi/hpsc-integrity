@@ -13,3 +13,6 @@
   them; the gene table (main chromosomes only) discarded those counts.
 - Fix: index transcripts on chr1-22, X, Y, MT only (187,056) and re-quantify.
 - Implication: any gene with alt/patch copies is affected, not just POU5F1.
+- Result after primary-only re-index: POU5F1 760-1,898 CPM in all five lines (was 1.4-4.6 in
+  four of five). Mapping rates unchanged (reads still pseudoaligned; they had been assigned to
+  alt copies that the gene table dropped).
