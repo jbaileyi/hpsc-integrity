@@ -24,3 +24,12 @@
 ## Index uses primary-assembly transcripts only
 - See docs/lessons.md (POU5F1 / MHC alt haplotypes). MT transcripts stay in the index so
   mitochondrial reads are not forced onto nuclear lookalikes; they are dropped at the gene-table stage.
+
+## First profile (expression), initial choices
+- Gene filter: >= 20 estimated reads in every sample (MIN_COUNTS = 20). Starting value, not tuned.
+- Normalization: counts per million, log2(CPM + 1).
+- Baseline: per-gene median across the five hESC lines. Valid only because each chromosome is
+  abnormal in at most one line; this is the batch-baseline dependence noted for e-Karyotyping.
+- Smoothing: moving median, 200 genes, within chromosome (window size from the paper's
+  expression method; not tuned).
+- TODO (me): justify or change each choice after looking at results; rewrite in my own words.
