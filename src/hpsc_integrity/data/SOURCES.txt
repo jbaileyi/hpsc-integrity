@@ -1,0 +1,4 @@
+Genes: protein-coding genes on chr1-22, X, Y from the headers of the Ensembl release 112
+GRCh38 cDNA FASTA (Homo_sapiens.GRCh38.cdna.all.fa.gz). Chromosome, start, end, gene symbol.
+Arms: first band start to last band end per arm from the UCSC hg38 cytoBand table.
+Built by scripts/build_reference.py. Check each provider's terms before redistributing.

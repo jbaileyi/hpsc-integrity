@@ -13,8 +13,14 @@ dependencies = ["numpy", "pandas"]
 [project.optional-dependencies]
 dev = ["pytest"]
 
+[project.scripts]
+hpsc-integrity = "hpsc_integrity.cli:main"
+
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+hpsc_integrity = ["data/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

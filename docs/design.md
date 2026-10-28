@@ -73,3 +73,12 @@
 - Leave-one-out baseline needs >= 3 samples (code raises otherwise).
 - OPEN: users with 1-2 samples need a bundled reference panel of diploid hPSC lines.
 - TODO (me): re-read this in my own words; confirm or change each choice.
+
+## Package v0.0.2
+- annotation.py: Ensembl header parsing, gene table, UCSC cytoBand -> arms, gene-to-arm by midpoint.
+- pipeline.py: score_arms (genes with >= 20 reads in every sample, log2 CPM, leave-one-out baseline,
+  per-sample offset, arm medians). match_genes accepts Ensembl IDs with or without version suffix.
+- cli.py: hpsc-integrity counts.csv -o outdir -> arm_log2_ratios.csv, arm_calls.csv, qc.csv.
+- Reference bundled in the package (Ensembl 112 GRCh38 genes; hg38 arms), rebuilt by scripts/build_reference.py.
+- Regression test: package reproduces results/arm_log2_ratios_leave_one_out.csv from the notebook.
+- TODO before release: confirm Ensembl and UCSC redistribution terms for the bundled tables.
