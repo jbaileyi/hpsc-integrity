@@ -20,3 +20,7 @@
   effective length ~10 nt (inflated TPM; depends on the -l 200 assumption).
 - Gene counts = sum of kallisto est_counts over a gene's transcripts.
 - TODO (me): rewrite this reasoning in my own words.
+
+## Index uses primary-assembly transcripts only
+- See docs/lessons.md (POU5F1 / MHC alt haplotypes). MT transcripts stay in the index so
+  mitochondrial reads are not forced onto nuclear lookalikes; they are dropped at the gene-table stage.
