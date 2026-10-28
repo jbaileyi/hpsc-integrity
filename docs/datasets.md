@@ -26,3 +26,18 @@ Parthenogenetic / SWAP samples. Labels inconsistent (swaPS2 labeled Parthenogene
 ## Comparison tool
 - eSNPKaryotyping (R): https://github.com/BenvenLab/eSNPKaryotyping
 - Last commit / installs? TODO
+
+## Truth table verified against Figure 3 (G-banding panels, read by eye)
+| Line | Run | G-banding (Fig 3) | eSNP signal (Fig 3, approx.) |
+|---|---|---|---|
+| CSES9 | SRR3501465 | no abnormality marked | none significant |
+| CSES7 | SRR3501466 | no abnormality marked | none significant (small spike at start of chr1: note) |
+| CSES22 | SRR3501467 | trisomy 12 (red box) | allelic ratio ~2.0-2.2 on chr12 |
+| CSES21 | SRR3501468 | trisomy 21 (red box) | peak ~1.9 at chr21 |
+| HUES14 | SRR3501469 | abnormal chr20 homolog (red arrowhead) | small signal at 20q11.21/BCL-XL; needed 51-SNP windows + common SNPs |
+
+Notes
+- SRA metadata labels HUES14 "d20q21.11"; figure inset and paper text say 20q11.21. Use 20q11.21; gain vs loss not stated in metadata.
+- All five panels appear to be XY: no X-status test possible here.
+- Expectation written BEFORE running: arm-level expression calls should find chr12 (CSES22) and
+  probably chr21 (CSES21); HUES14 focal 20q11.21 is expected to be a miss.
