@@ -42,3 +42,16 @@
   reason, before any tuning; real-data truth is not used to pick settings.
 - Result: trisomy 12 (CSES22) +0.55, trisomy 21 (CSES21) +0.53, vs 0.585 expected (94%, 91%).
 - Known artifact: diploid lines dip slightly on a chromosome that is trisomic in another line.
+
+## Per-sample offset and empirical null
+- After leave-one-out, each line carries a global offset (median of 22 autosome medians):
+  CSES9 -0.053, CSES7 +0.043, CSES22 +0.016, CSES21 0.000, HUES14 -0.040. Subtracted per line.
+  Cause not established.
+- Result: chr12 (CSES22) +0.53, chr21 (CSES21) +0.53 = 91% of log2(3/2) = 0.585.
+- Empirical null (108 autosome medians excluding the two trisomies): SD 0.051, max |x| 0.177.
+  Largest: CSES7 chr17 +0.18, HUES14 chr17 -0.16, CSES7 chr21 -0.13 (unexplained).
+- Limitation: null comes from 5 lines of one study/platform; other labs' data will be noisier.
+- Idea for simulation: two-pass baseline (call, then drop flagged samples from comparators).
+  Evidence: all four diploid lines read -0.06 to -0.07 on chr12 because the trisomic line is
+  in their comparator set.
+- Back-of-envelope whole-chromosome detection limit from this null: ~25-30% mosaic. NOT a result.
