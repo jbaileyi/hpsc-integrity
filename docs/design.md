@@ -65,3 +65,11 @@
   ~20% at 0.12, ~33% at 0.20.
 - 20q11.21 band (21 genes incl. BCL2L1) is not callable by expression; allelic method needed.
 - TODO (me): confirm or change thresholds and write the reasoning in my own words.
+
+## Package structure and decisions (v0.0.1)
+- src layout; core.py holds pure functions (counts -> log2 ratios -> arm medians -> tiers).
+- Call every chromosome arm, then annotate hotspots (trisomy 21 in the test data is not a hotspot).
+- Tiers (provisional): high |log2| >= 0.20; possible >= 0.12; none. Arms need >= 50 genes. X/Y not assessed.
+- Leave-one-out baseline needs >= 3 samples (code raises otherwise).
+- OPEN: users with 1-2 samples need a bundled reference panel of diploid hPSC lines.
+- TODO (me): re-read this in my own words; confirm or change each choice.

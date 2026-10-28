@@ -16,3 +16,10 @@
 - Result after primary-only re-index: POU5F1 760-1,898 CPM in all five lines (was 1.4-4.6 in
   four of five). Mapping rates unchanged (reads still pseudoaligned; they had been assigned to
   alt copies that the gene table dropped).
+
+## Median baseline bias reproduced in synthetic data
+- Synthetic test (5 samples, one with chr1 at 1.5x): trisomic sample offset -0.172; chr1 arms +0.576
+  and +0.583 (expected 0.585); the four diploid samples read -0.03 to -0.08 on chr1.
+- Same direction and size as real data (diploid lines -0.06 to -0.07 on chr12 when CSES22 trisomic).
+- Cause: with 4 comparators, one abnormal sample shifts the median. Estimator property, not a data quirk.
+- Mitigations to test in simulation: larger reference panel; two-pass baseline excluding flagged samples.

@@ -6,3 +6,8 @@ data/ref/
 data/index/
 data/quant/
 data/processed/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
