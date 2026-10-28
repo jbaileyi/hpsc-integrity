@@ -33,3 +33,12 @@
 - Smoothing: moving median, 200 genes, within chromosome (window size from the paper's
   expression method; not tuned).
 - TODO (me): justify or change each choice after looking at results; rewrite in my own words.
+
+## Baseline: leave-one-out instead of median-of-5
+- Median-of-5 pins ~1/5 of values at exactly 0 (the line equal to the median), so flat regions show
+  exact zeros and a moving median stays stuck until more than half a window deviates. It hides
+  small shifts, which matters for a detection-limit claim.
+- Leave-one-out (each line vs the median of the other four) removes this. Chosen for this structural
+  reason, before any tuning; real-data truth is not used to pick settings.
+- Result: trisomy 12 (CSES22) +0.55, trisomy 21 (CSES21) +0.53, vs 0.585 expected (94%, 91%).
+- Known artifact: diploid lines dip slightly on a chromosome that is trisomic in another line.

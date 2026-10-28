@@ -58,3 +58,10 @@ Notes
 - HUES14 chr20: 0.00 (focal 20q11.21 not detected, as predicted beforehand).
 - Candidates to check, not findings: CSES7 chr17 +0.11, HUES14 chr17 -0.09, CSES21 chrX -0.12.
 - Caveat: with 5 lines the median baseline pins ~20% of values at exactly 0 (flat lines, sharp steps).
+
+## Leave-one-out profile (MIN_COUNTS=20, window=200)
+- CSES22 chr12 +0.55; CSES21 chr21 +0.53. Next-largest autosome deviations: CSES7 chr17 +0.22,
+  HUES14 chr17 -0.20 (both also present, smaller, under median-of-5). CSES21 chrX -0.23 (X not
+  assessed in v0.1).
+- G-banding calls CSES7 and HUES14 normal. Chr17 deviations unexplained: candidate false positives
+  until checked against Fig 3 allelic panels.
