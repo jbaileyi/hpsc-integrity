@@ -82,3 +82,18 @@
 - Reference bundled in the package (Ensembl 112 GRCh38 genes; hg38 arms), rebuilt by scripts/build_reference.py.
 - Regression test: package reproduces results/arm_log2_ratios_leave_one_out.csv from the notebook.
 - TODO before release: confirm Ensembl and UCSC redistribution terms for the bundled tables.
+
+## Spike-in simulation: design and predictions (written BEFORE running)
+- Real G-banding-diploid lines (CSES9, CSES7, HUES14) modified in silico: a gain in fraction f of
+  cells raises the target/rest ratio by 1 + f/2 (non-target reads thinned); a loss lowers it by
+  1 - f/2 (target reads thinned). Reads are only removed, never invented.
+- Targets: 1q, 12p, 17q gains; 10p, 18q losses. f in {0, .05, .1, .2, .3, .5, .75, 1}; depth
+  (fraction of reads kept for the test sample) in {1, .5, .25, .1}; 20 replicates.
+- Comparators: the other four lines, minus any known abnormal on the target chromosome
+  (CSES22 for chr12, CSES21 for chr21).
+- Assumes expression is proportional to copy number (real trisomies reached 91-94% of that).
+- Prediction from the real-data null (back-of-envelope): 'possible' (0.12) needs about 20% mosaic and
+  'high' (0.20) about 33% at full depth. Depth should worsen both, because fewer genes pass the
+  20-read filter; size not predicted.
+- Limitations: thresholds derived from the same five lines (in-sample); panel is 4 comparators from
+  one study; CSES7 and HUES14 carry unexplained chr17 shifts that affect their 17q results.
