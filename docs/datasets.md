@@ -65,3 +65,13 @@ Notes
   assessed in v0.1).
 - G-banding calls CSES7 and HUES14 normal. Chr17 deviations unexplained: candidate false positives
   until checked against Fig 3 allelic panels.
+
+## Arm-level results (leave-one-out, per-sample offset removed; 12p/12q/21q from cytoBand hg38)
+- Detected: CSES22 12p +0.50, 12q +0.55; CSES21 21q +0.53.
+- Acrocentric short arms (13p, 14p, 15p, 21p, 22p) have no protein-coding genes: not assessable.
+- Y arms (5 and 9 genes) give nonsense values (Yq +1.41 CSES7, -0.75 CSES22): minimum-genes rule needed.
+- 20q11.21 band (hg38 chr20:30.4-33.5 Mb, 21 genes): CSES9 +0.38, CSES7 -0.29, CSES21 -0.25,
+  CSES22 +0.17, HUES14 +0.13 => not callable by expression (HUES14 inside the noise).
+- Candidate false positives: CSES7 chr17 (both arms +0.16/+0.20), HUES14 17q -0.17, CSES21 18q -0.17.
+  If expression ~ copy number, these imply ~25-33% subclones, which a 20-metaphase karyotype would
+  almost certainly detect (number of metaphases scored here unknown).
