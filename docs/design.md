@@ -11,3 +11,12 @@
   is not measured, so kallisto needs an assumed mean and SD.
 - Used -l 200 -s 20 (kallisto manual example). Assumption, not a measurement.
 - TODO: sensitivity check (re-run one sample with a different -l, compare chromosome-arm results).
+
+## Gene filter
+- Keep protein-coding genes (Ensembl gene_biotype) on chr1-22, X, Y only.
+- Dropped: MT (not nuclear copy number; few very abundant genes distort normalization),
+  alt scaffolds/patches (duplicate genes), pseudogenes and other non-coding genes.
+- Evidence: top transcript by TPM in CSES22 included a 177-nt processed pseudogene with
+  effective length ~10 nt (inflated TPM; depends on the -l 200 assumption).
+- Gene counts = sum of kallisto est_counts over a gene's transcripts.
+- TODO (me): rewrite this reasoning in my own words.
