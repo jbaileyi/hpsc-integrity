@@ -115,3 +115,11 @@
 - Runtime: bcftools mpileup + call took 28.4 min on one core for 45.7M reads.
 - Crude linear model (assumption from one trisomy): ratio(f) ~ 1.404 + 0.6 f. 0.104 (largest null) <-> f ~ 0.18;
   0.15 (3 SD) <-> f ~ 0.26. To be replaced by simulation.
+
+## Allelic results, all five lines, against pre-registered predictions
+- CSES21 21q +0.418 (3.5 robust SDs; line SD 0.121): prediction met, marginal power.
+- CSES9 20q -0.012, 20p -0.061: inside +/-0.10, so the rule gives "expression-only difference". Detection limit 38% (z=3).
+- CSES7 17p -0.169, 17q +0.056: INCONCLUSIVE. Detection limit 58% exceeds the predicted 26-44% clone; line is underpowered.
+- 9q: prediction (+/-0.15) WRONG. CSES9 +0.702 (65 SNPs), HUES14 +0.815 (85 SNPs), not seen in other 3 lines. Under investigation.
+- Robust SD (MAD, outliers removed): CSES22 0.047, HUES14 0.065, CSES9 0.083, CSES21 0.121, CSES7 0.123.
+- Earlier QC check of CSES7 alignment (50.9%) was invalid (sorted BAM head = chr1 only); redone with idxstats.
