@@ -85,3 +85,21 @@
 - Arm values move ~0.1 with panel choice (chr12: 0.50/0.55 under A vs 0.40/0.58 under B).
 - Conclusion: a larger panel redistributes line-specific deviations; it does not remove them. Expression-only
   strong calls at 0.20 are not reliable alone. Independent evidence (allelic imbalance) is the planned fix (v0.2).
+
+## 13-line profile: results and corrections
+- Each line vs all 12 others (arms of known trisomies excluded; ~504 arm-line pairs): none >= 0.30;
+  22 arms >= 0.12 (13 in CSES21 alone); 5 arms >= 0.20, all in NextSeq hESC lines (5/192 = 2.6%, ~1 per
+  sample), none in the 8 HiSeq lines. HiSeq lines resemble each other, so their clean profiles are not a
+  general null. Platform and line type are confounded.
+- Robust SD: HiSeq 0.022-0.046; hESC CSES9 0.061, CSES7 0.039, CSES22 0.055, CSES21 0.100, HUES14 0.029.
+  CSES21 is the clear noise outlier: a per-sample QC flag is useful (different use from the dropped
+  threshold-scaling idea).
+- CORRECTION: HUES14 17q is -0.17 vs 4 hESC lines but -0.04 vs the 8 HiSeq lines: an artifact of CSES7 being
+  in its comparator set. HUES14 is the cleanest line.
+- CSES7 chr17 persists and grows vs HiSeq (17p/17q +0.24/+0.26); CSES9 20q +0.17 -> +0.27. Both are arms
+  commonly gained in hPSC culture. Unadjudicated, not "false": G-banding may be from another passage and
+  cannot exclude clones < ~14%; the allelic method (Fig 3, image too coarse to read per arm) cannot
+  exclude < ~1/3.
+- PREDICTION (before computing): if these are real subclonal gains, allelic imbalance from our own reads
+  will rise on CSES7 chr17 and CSES9 chr20 relative to each line's other chromosomes. If it does not,
+  I will treat them as expression differences.
