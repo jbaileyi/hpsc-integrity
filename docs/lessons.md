@@ -166,3 +166,11 @@
 - 48-68% of arms are UNDERPOWERED: single-arm calls are limited to large clones. Module is arm-level; cannot see focal 20q11.21.
 - gain_frac_hi95 uses the expression model (1 + f/2); pilot fit was 1.404 + 0.6 f. Unvalidated; to be replaced by simulation.
 - Not duplicated by run_panel_experiment.py (expression); consistent with its conclusion that larger panels redistribute deviations.
+
+## Density check and allelic spike-in (3-rep pass) against predictions
+- Density: 19q single-sample rel density 0.36-0.66 in all five lines; arm-specific leave-one-out gives CSES9 1.15, HUES14 1.08, CSES21 0.79,
+  CSES7 0.62. 9q x2 and CSES22 16p stay 0.23-0.30. Metric artifact for 19q confirmed in four lines; CSES7 stays 0.62 (not < 0.5). Fix needs a
+  per-arm expected-density table (bundled), not five-line leave-one-out.
+- Spike-in (reps=3, rough): f=0 and f<=0.3 never GAIN; false GAIN elsewhere 0. CSES9 and HUES14 reach GAIN at f=0.75 (f=0.5 gives 0-67%).
+  PREDICTION FAILED: CSES7 never reaches GAIN even at f=1 (mean log2 +0.03 to +0.08 vs +0.38 to +0.50 elsewhere). Cause unchecked: noise or a bug.
+- Caveat: allelic shift model (f/(2+f) read moves) validated against one real trisomy only.
