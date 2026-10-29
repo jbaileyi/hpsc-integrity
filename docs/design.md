@@ -148,3 +148,11 @@
   het/total near 0 across much of 9q; no 9q expression shift.
 - B (real imbalance): normal het density on 9q; 9q expression log2 > +0.1 in both lines.
 - Note: ratios 2.33 / 2.47 exceed the full-trisomy value in CSES22 (2.06), which a single-copy gain should not reach.
+
+## Allelic calls module (written BEFORE running)
+- States: GAIN / NORMAL / UNDERPOWERED / REFUSED_HET_DEPLETED / TOO_FEW_SNPS. No LOSS (a loss depletes hets, it does not shift ratios).
+- GAIN if bootstrap CI lower bound > +0.10; NORMAL if CI upper bound < +0.10; otherwise UNDERPOWERED. Refuse if SNPs-per-gene is < 0.5x the sample median.
+- Predictions: CSES22 12p and 12q = GAIN; CSES21 21q = GAIN; CSES9 and HUES14 9q = REFUSED; CSES22 16p = REFUSED;
+  CSES7 17p = NORMAL, 17q = UNDERPOWERED; CSES9 20q = UNDERPOWERED. Zero GAIN calls on any other arm in any line.
+- Expected weakness: many arms in the noisy lines (CSES7, CSES21) will be UNDERPOWERED, not NORMAL. That is honest, not a bug.
+- Risk: HUES14 9q relative density may sit near the 0.5 cutoff; CSES7 8p/19p/19q (0.53-0.58 vs other lines) may be wrongly refused.
