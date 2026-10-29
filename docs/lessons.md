@@ -143,3 +143,9 @@
 - CSES21 21p and HUES14 Yq have 1 SNP each: "too few SNPs", not het depletion. Refuse logic needs a separate TOO_FEW_SNPS state.
 - GC content (0.495) of CSES7 reads is uninformative for human vs mouse. Unmapped reads may be rRNA, mouse, or low quality; unresolved.
 - Observation: 19p negative in CSES7, CSES21, HUES14, CSES22; suspect a systematic artifact (see recurrence table).
+
+## Recurrence across lines
+- 19p negative in 5/5 lines (median -0.12), 21q 4/4, 8p 5/5, 7p 5/5, 15q positive 5/5. Modest (0.05-0.12) but same-sign across
+  unrelated lines: likely systematic (reference bias / batch), n=5 only so cohort effects and batch are confounded.
+- CSES21 19p (-0.22) is therefore not a line-specific loss. CSES21 21q (+0.418) sits on an arm with negative cohort median.
+- Next: cohort-baseline rescoring (leave-one-out panel median).
