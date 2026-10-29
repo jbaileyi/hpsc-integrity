@@ -201,3 +201,7 @@
 - spikein_lod: lod_any 0.2-0.3, lod_high 0.5 for 1q/12p/10p/18q; 17q 0.5/0.75. Depth 0.1-1x changes little. Grid-resolution upper bounds.
 - Null false calls per run: high 0.18-0.22, possible 2.3-3.3 (rises as depth falls). Prior estimate of 33% for 'high' was optimistic.
 - datasets.md truth table was read by eye from Fig 3.
+
+## CSES7 unmapped reads: closed without resolution
+- Unmapped fraction 49.0% in a 500k sample (matches the BAM). Not adapter/polyA dominated; may be rRNA, mouse feeder, or low quality.
+- 40-read FASTA for BLAST written (results/qc/SRR3501466_unmapped_sample.fa) but never classified. Decision: not pursued; documented as a limitation.

@@ -29,7 +29,7 @@ Screen human pluripotent stem cell (hPSC) RNA-seq for chromosome-arm gains and l
 - **Expression `high` calls are not reliable alone** (about 1 false `high` per 5 samples in the null simulation); treat them as leads to confirm.
 - **Expression and allelic evidence are not combined** into one call; they can disagree (e.g. CSES7 17p/17q).
 - The spike-in shift model matches one real trisomy (simulated f=1 about +0.43 vs real +0.43/+0.53).
-- CSES7's 51% alignment rate is unexplained.
+- CSES7's 51% alignment rate is unexplained. Unmapped reads were not adapter, polyA or all-N dominated (a sample was written to `results/qc/` for BLAST but not classified). Cause not investigated further.
 
 ## Development record
 
