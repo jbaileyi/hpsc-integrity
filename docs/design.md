@@ -156,3 +156,12 @@
   CSES7 17p = NORMAL, 17q = UNDERPOWERED; CSES9 20q = UNDERPOWERED. Zero GAIN calls on any other arm in any line.
 - Expected weakness: many arms in the noisy lines (CSES7, CSES21) will be UNDERPOWERED, not NORMAL. That is honest, not a bug.
 - Risk: HUES14 9q relative density may sit near the 0.5 cutoff; CSES7 8p/19p/19q (0.53-0.58 vs other lines) may be wrongly refused.
+
+## Density fix and allelic spike-in (written BEFORE running)
+- Density test: compare single-sample relative density with leave-one-out arm-specific density (arm density / median of other 4 lines).
+  Predict: 19q moves to ~1 in all lines under leave-one-out; 9q (x2) and CSES22 16p stay < 0.5; no new arm falls below 0.5.
+  If 19q stays < 0.5 in CSES7/CSES21 after correction, treat as possibly real het depletion, not a metric artifact.
+- Spike-in (reads moved between alleles at existing het SNPs, depth unchanged; targets 1q, 12q, 20p in CSES9, HUES14, CSES7):
+  Predict f=0 gives <= 1% GAIN on the target arm and ~0 false GAINs elsewhere; f=1 gives GAIN in >= 90% of runs;
+  80%-GAIN detection limit is >= 0.5 in all three lines (arm-level allelic is a large-clone detector), and worst in CSES7;
+  f <= 0.3 is essentially never GAIN.

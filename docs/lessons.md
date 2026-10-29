@@ -157,3 +157,12 @@
 - Decision: single-sample baseline is default; panel normalisation optional and off by default. n=5 is too small for a fair panel test.
 - 19p allelic negative shift not mirrored in expression (CSES9 +0.156, CSES7 -0.102): likely technical, unproven.
 - CSES7 unmapped-read BLAST: still pending.
+
+## Allelic calls module: results against predictions
+- Met: 12p/12q/21q GAIN; 9q (CSES9, HUES14) and CSES22 16p REFUSED; CSES7 17p NORMAL, 17q UNDERPOWERED; CSES9 20q UNDERPOWERED; 0 GAIN on ~190 null arm-tests.
+- Partly failed: 19q refused in CSES7 (rel density 0.36) and CSES21 (0.46); 0.57-0.66 elsewhere. 19q is low in all five lines, so the single-sample
+  density metric (SNPs per protein-coding gene) is biased for this arm. CSES21 19q refusal was not predicted.
+- In-sample caveat: the CI rule was fixed after seeing the bootstrap CIs on these lines; 3 true positive arms only.
+- 48-68% of arms are UNDERPOWERED: single-arm calls are limited to large clones. Module is arm-level; cannot see focal 20q11.21.
+- gain_frac_hi95 uses the expression model (1 + f/2); pilot fit was 1.404 + 0.6 f. Unvalidated; to be replaced by simulation.
+- Not duplicated by run_panel_experiment.py (expression); consistent with its conclusion that larger panels redistribute deviations.
