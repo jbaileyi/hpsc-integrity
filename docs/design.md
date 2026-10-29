@@ -142,3 +142,9 @@
   of chr17 (CSES7) or on 20q (CSES9); supports an expression-only difference if within +/-0.10; between
   is inconclusive. Each line's null SD is taken from its own other arms.
 - Caveat: the linear model is fitted to one trisomy and is an assumption.
+
+## 9q hypotheses (written BEFORE het-depletion and expression checks)
+- A (het-depleted arm; leftover hets are artifacts): CSES9 and HUES14 9q hold <40% of the typical share of kept SNPs;
+  het/total near 0 across much of 9q; no 9q expression shift.
+- B (real imbalance): normal het density on 9q; 9q expression log2 > +0.1 in both lines.
+- Note: ratios 2.33 / 2.47 exceed the full-trisomy value in CSES22 (2.06), which a single-copy gain should not reach.
