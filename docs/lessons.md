@@ -184,3 +184,8 @@
 - Correction to my earlier note: I said a possible simulation bug could not be excluded; the identical code gives normal results in two lines
   and the CSES7 ratio data explain the result, so I now treat it as a limit.
 - Caveat: shift model (moving f/(2+f) of reads) checked against one real trisomy only.
+
+## Shift-model check against the real trisomy
+- Real CSES22 12p/12q log2 +0.43/+0.53; simulated f=1 (CSES9, HUES14) +0.42/+0.43. Simulation is ~0.05 lower (conservative). Compared
+  two arms of one real line with a mean over three arms in two lines; one trisomy only.
+- CSES7 unmapped-read BLAST not run; CSES7 low alignment (50.9%) cause remains unresolved.

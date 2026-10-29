@@ -1,0 +1,6 @@
+sample,het_snps_kept,baseline_ratio,arms_assessed,frac_underpowered,flags
+CSES9,8722,1.434,37,0.73,
+CSES7,14382,1.816,37,0.81,ALLELIC_POWER_LOW
+CSES22,9971,1.404,38,0.55,
+CSES21,16449,1.6,38,0.68,
+HUES14,10361,1.402,38,0.61,

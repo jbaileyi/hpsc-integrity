@@ -165,3 +165,9 @@
   Predict f=0 gives <= 1% GAIN on the target arm and ~0 false GAINs elsewhere; f=1 gives GAIN in >= 90% of runs;
   80%-GAIN detection limit is >= 0.5 in all three lines (arm-level allelic is a large-clone detector), and worst in CSES7;
   f <= 0.3 is essentially never GAIN.
+
+## CLI allelic step: QC flag (written BEFORE running)
+- `hpsc-integrity counts.csv --snps NAME=snps.tsv` adds allelic calls (GAIN / refusals) and an allelic QC row per sample.
+- Flag ALLELIC_POWER_LOW if the sample's baseline median ratio (median of autosomal arm medians) exceeds 1.6. Provisional: set from
+  CSES7 only (arm medians 1.66-1.88 vs 1.35-1.6 in CSES9/HUES14; CSES22 baseline 1.404).
+- Prediction: CSES7 flagged; CSES9, CSES22, CSES21, HUES14 not. If step 1 shows CSES21 above 1.6, the threshold is not specific to CSES7.

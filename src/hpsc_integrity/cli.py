@@ -7,6 +7,7 @@ import pandas as pd
 from . import __version__
 from .annotation import load_reference
 from .core import call_tiers
+from .allelic_report import run_allelic, summarize
 from .pipeline import score_arms
 
 
@@ -31,6 +32,8 @@ def main(argv=None):
                    help="a gene needs this many estimated reads in every sample (default 20)")
     p.add_argument("--genes", help="gene table CSV (default: bundled Ensembl 112 / GRCh38)")
     p.add_argument("--arms", help="arm boundary CSV (default: bundled hg38)")
+    p.add_argument("--snps", action="append", metavar="SAMPLE=PATH", default=[],
+                   help="optional: per-sample heterozygous-SNP allele counts (bcftools query output); repeat per sample")
     p.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     args = p.parse_args(argv)
 
@@ -49,6 +52,14 @@ def main(argv=None):
     qc = pd.DataFrame({"offset": offsets.round(4), "genes_used": n_genes})
     qc.index.name = "sample"
     qc.to_csv(out / "qc.csv")
+    if args.snps:
+        try:
+            a_calls, a_qc = run_allelic(args.snps, genes, arms)
+        except (ValueError, FileNotFoundError) as e:
+            p.error(str(e))
+        a_calls.to_csv(out / "allelic_calls.csv", index=False)
+        a_qc.to_csv(out / "allelic_qc.csv", index=False)
+        print(summarize(a_calls, a_qc))
 
     flagged = calls[calls["tier"].isin(["high", "possible"])].copy()
     flagged["abs"] = flagged["log2_ratio"].abs()
