@@ -103,3 +103,15 @@
 - PREDICTION (before computing): if these are real subclonal gains, allelic imbalance from our own reads
   will rise on CSES7 chr17 and CSES9 chr20 relative to each line's other chromosomes. If it does not,
   I will treat them as expression differences.
+
+## Allelic pilot (CSES22) against predictions
+- 12p +0.474 (ratio 1.950, 151 SNPs), 12q +0.555 (ratio 2.062, 490 SNPs); baseline 1.404; expected for a
+  full trisomy log2(2.0/1.404) = 0.510. Prediction (+0.4 to +0.75): met.
+- Other 37 autosomal arms: SD 0.050 (robust 0.047), max |x| 0.104 (21q). Prediction (within +/-0.15): met.
+  Trisomy arms are 9.5 and 11.1 null SDs above the null mean.
+- SNP counts: 64,718 rows, 9,971 kept. Prediction (low thousands; only larger arms reach 50): WRONG.
+  I misapplied the paper's ~2,000 SNP figure; every assessed autosomal arm had >= 58 SNPs.
+- X arms (male line) ratios 1.58 / 1.82: not assessed by design; probably artifacts of hemizygous X (not checked).
+- Runtime: bcftools mpileup + call took 28.4 min on one core for 45.7M reads.
+- Crude linear model (assumption from one trisomy): ratio(f) ~ 1.404 + 0.6 f. 0.104 (largest null) <-> f ~ 0.18;
+  0.15 (3 SD) <-> f ~ 0.26. To be replaced by simulation.

@@ -130,3 +130,15 @@
 - PREDICTION, CSES22 pilot: 12p and 12q log2_vs_baseline between +0.4 and +0.75; most other arms
   within +/-0.15; kept SNPs in the low thousands (the paper reports ~2,000 SNPs at 15-20M reads), so
   only the larger arms reach 50 SNPs.
+
+## Allelic predictions for the other four lines (written BEFORE running)
+- CSES21 21q: log2 +0.4 to +0.75 (positive control). If 21q has fewer than 50 SNPs it is not assessed.
+- CSES9, CSES7, HUES14: arms other than those under test within +/-0.15 of baseline.
+- CSES7 chr17: expression shift +0.16 to +0.26 would imply a clone of roughly 26-44% if real
+  (expression ~ copy number, ~91% attenuation); crude model then predicts allelic log2 +0.15 to +0.25
+  on BOTH 17p and 17q.
+- CSES9 20q: expression +0.17 to +0.27 implies roughly 28-46%; predicts allelic log2 +0.16 to +0.26.
+- Decision rule: supports a real gain if allelic log2 exceeds +0.15 (~3 null SDs of that line) on both arms
+  of chr17 (CSES7) or on 20q (CSES9); supports an expression-only difference if within +/-0.10; between
+  is inconclusive. Each line's null SD is taken from its own other arms.
+- Caveat: the linear model is fitted to one trisomy and is an assumption.
