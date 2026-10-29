@@ -137,3 +137,9 @@
   CSES9 20q +0.032 [-0.15, 0.27]; CSES7 17p -0.164 [-0.27, -0.01], 17q +0.064 [-0.08, 0.23].
 - CSES9 20q: rule gives expression-only, but gain fraction up to ~40% not excluded. CSES7 chr17: no gain on both arms; clone <~35% on 17q not excluded.
 - New: CSES21 19p -0.22 [-0.28, -0.11], unexplained.
+
+## Corrections (after het-density run)
+- CORRECTION: CSES22 16p has 58 SNPs and was assessed (log2 -0.090); the earlier line saying it was not assessed was wrong.
+- CSES21 21p and HUES14 Yq have 1 SNP each: "too few SNPs", not het depletion. Refuse logic needs a separate TOO_FEW_SNPS state.
+- GC content (0.495) of CSES7 reads is uninformative for human vs mouse. Unmapped reads may be rRNA, mouse, or low quality; unresolved.
+- Observation: 19p negative in CSES7, CSES21, HUES14, CSES22; suspect a systematic artifact (see recurrence table).

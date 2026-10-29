@@ -8,6 +8,6 @@ rows = []
 for l in M:
     rel = share[l] / share.drop(columns=l).median(axis=1)
     rows += [dict(line=l, arm=a, n_snps=int(A.loc[a, l]), rel_het_density=round(v, 2), verdict="REFUSE" if v < 0.4 else "ok")
-             for a, v in rel.items() if v < 0.6]
+             for a, v in rel.items() if v < 0.6 and A.loc[a, l] >= 20]
 df = pd.DataFrame(rows).sort_values("rel_het_density"); print(df.to_string(index=False))
 df.to_csv("results/allelic/het_density_flags.csv", index=False)
