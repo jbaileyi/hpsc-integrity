@@ -115,3 +115,18 @@
   be platform-matched.
 - Caveat: the HiSeq lines have no G-banding truth here; if some carry abnormalities, a median over many
   lines is robust to a few, but I have not verified this.
+
+## Allelic module v0.2: choices and pilot prediction (written BEFORE running)
+- Alignment: HISAT2 2.2.3, prebuilt GRCh38 genome index (Ensembl chromosome names), single-end.
+  CSES22: 86.3% overall alignment (81.0% unique), ~8 min wall time with 8 threads.
+- SNPs: bcftools mpileup (MAPQ >= 20, base quality >= 20, max depth 2000) -> call -mv -> biallelic SNPs,
+  QUAL >= 30 (arbitrary starting value). No known-SNP filter, so RNA editing and paralog artifacts can
+  get through.
+- Filters as in the source paper: depth >= 20, minor allele fraction >= 0.2. Statistic: per-arm median
+  of the major/minor allele ratio; log2 relative to the sample's own baseline (median of autosomal arm
+  medians); arms need >= 50 SNPs; X and Y not assessed.
+- Expectation for a clonal gain: ratio ~ 1 + f (about 2 at f = 1) against a diploid baseline that sits
+  above 1 because of sampling noise (~1.3-1.4 in the paper).
+- PREDICTION, CSES22 pilot: 12p and 12q log2_vs_baseline between +0.4 and +0.75; most other arms
+  within +/-0.15; kept SNPs in the low thousands (the paper reports ~2,000 SNPs at 15-20M reads), so
+  only the larger arms reach 50 SNPs.
