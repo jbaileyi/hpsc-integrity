@@ -11,3 +11,5 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 .ipynb_checkpoints/
+data/hisat2/
+data/bam/
