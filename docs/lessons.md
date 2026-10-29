@@ -149,3 +149,11 @@
   unrelated lines: likely systematic (reference bias / batch), n=5 only so cohort effects and batch are confounded.
 - CSES21 19p (-0.22) is therefore not a line-specific loss. CSES21 21q (+0.418) sits on an arm with negative cohort median.
 - Next: cohort-baseline rescoring (leave-one-out panel median).
+
+## Cohort baseline test (negative result)
+- Leave-one-out cross-line median subtraction, n=5. Robust SD raw -> corrected: CSES9 0.083->0.085, CSES7 0.123->0.135,
+  CSES22 0.048->0.091 (worse), CSES21 0.121->0.101, HUES14 0.065->0.053. Mixed; hurts the cleanest line.
+- CSES22 12q corrected +0.454 (raw +0.555, expected +0.51): correction worsened the best control.
+- Decision: single-sample baseline is default; panel normalisation optional and off by default. n=5 is too small for a fair panel test.
+- 19p allelic negative shift not mirrored in expression (CSES9 +0.156, CSES7 -0.102): likely technical, unproven.
+- CSES7 unmapped-read BLAST: still pending.
