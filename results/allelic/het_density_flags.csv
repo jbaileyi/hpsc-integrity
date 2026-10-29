@@ -1,0 +1,9 @@
+line,arm,n_snps,rel_het_density,verdict
+CSES9,9q,65,0.25,REFUSE
+HUES14,9q,85,0.27,REFUSE
+CSES22,16p,58,0.29,REFUSE
+CSES21,21p,1,0.31,REFUSE
+HUES14,Yq,1,0.48,ok
+CSES7,8p,119,0.53,ok
+CSES7,19p,257,0.54,ok
+CSES7,19q,217,0.58,ok
