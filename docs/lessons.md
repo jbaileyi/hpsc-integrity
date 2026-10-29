@@ -69,3 +69,19 @@
 - A single line-arm value moves ~0.05-0.10 with comparator choice (panel-composition uncertainty).
 - Unexplained: whether CSES7 (up) and HUES14 (down) chr17 shifts are biology (e.g., low-level mosaicism that
   G-banding and the allelic method could miss) or other line-to-line expression differences.
+
+## Panel experiment: results against predictions (pooled over CSES9, CSES7, HUES14; my arithmetic)
+- False weak calls per run: A 2.30, B 1.09, C 1.32, D 1.95. False strong calls per run: A 0.20,
+  B 0.93, C 0.93, D 0.93 (about 4.6x higher than A). Trisomy values: A 0.50/0.55/0.53, B 0.40/0.58/0.45,
+  C 0.40/0.57/0.45, D 0.41/0.56/0.40 (12p/12q/21q).
+- P1 weak calls fall: true, but strong false calls rose (not predicted). P2 D worse than C: modestly.
+  P3 limits stay ~0.3/0.5: true (17q uninterpretable).
+- My decision rule mentioned weak calls only: an oversight, not a pass. Conclusion drawn without it.
+- B, C, D nearly identical (8 of their comparators are the same HiSeq lines): other-platform comparators work
+  about as well as same-platform ones.
+- Per-line: CSES9 total false calls/run 2.06 (A) -> 3.18/4.02/4.87 (B/C/D); CSES7 4.44 -> 2.89/2.72/2.80;
+  HUES14 1.01 -> 0.00/0.03/0.99. CSES21 false weak 2 (A) vs 11-12 (B/C/D): cause unknown (platform/library
+  or line biology; not checked).
+- Arm values move ~0.1 with panel choice (chr12: 0.50/0.55 under A vs 0.40/0.58 under B).
+- Conclusion: a larger panel redistributes line-specific deviations; it does not remove them. Expression-only
+  strong calls at 0.20 are not reliable alone. Independent evidence (allelic imbalance) is the planned fix (v0.2).
