@@ -174,3 +174,13 @@
 - Spike-in (reps=3, rough): f=0 and f<=0.3 never GAIN; false GAIN elsewhere 0. CSES9 and HUES14 reach GAIN at f=0.75 (f=0.5 gives 0-67%).
   PREDICTION FAILED: CSES7 never reaches GAIN even at f=1 (mean log2 +0.03 to +0.08 vs +0.38 to +0.50 elsewhere). Cause unchecked: noise or a bug.
 - Caveat: allelic shift model (f/(2+f) read moves) validated against one real trisomy only.
+
+## Allelic spike-in, 8 reps, and CSES7 diagnosis
+- 8-rep results confirm the 3-rep pattern. CSES9 and HUES14: GAIN rate 1.0 at f>=0.75 (CSES9 20p 0.875), 0-0.5 at f=0.5, 0 at f<=0.3.
+  CSES7: 0 at every f, mean log2 +0.01 to +0.06 at f=1 (others +0.40 to +0.46). 0 false GAINs elsewhere in any run, f=0 included.
+- Limit is a grid point (0.75), true value is between 0.5 and 0.75; n=8 per cell, 2 usable lines, 3 arms.
+- CSES7 is a real limit: depth and SNP counts match the other lines, but baseline median ratio is 1.7-1.9 (others 1.35-1.6) with wider IQR.
+  A high baseline compresses the log2 effect of a gain and widens the bootstrap CI. Link to the 51% alignment / MT-rich library is a hypothesis, untested.
+- Correction to my earlier note: I said a possible simulation bug could not be excluded; the identical code gives normal results in two lines
+  and the CSES7 ratio data explain the result, so I now treat it as a limit.
+- Caveat: shift model (moving f/(2+f) of reads) checked against one real trisomy only.
