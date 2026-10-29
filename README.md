@@ -37,4 +37,4 @@ Predictions were written to `docs/design.md` before each experiment, and results
 
 ## License and data
 
-LICENSE: see file. Bundled Ensembl and UCSC tables: redistribution terms still to be confirmed (TODO).
+Code: MIT (see LICENSE). Bundled reference tables (Ensembl 112 GRCh38 gene coordinates; UCSC hg38 cytoBand arms) are derived coordinate tables; sources and terms are recorded in `src/hpsc_integrity/data/SOURCES.txt`.
