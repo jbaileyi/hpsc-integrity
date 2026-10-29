@@ -196,3 +196,8 @@
 - CLI shows CSES7 and CSES21 19q as "refused (het-depleted)": known density-metric artifact (see density check), misleading to users until fixed.
 - gain_frac_hi95 still in allelic_calls.csv; unvalidated.
 - Allelic vs expression: expression flags CSES7 17p/17q, CSES9 20q as possible; allelic gives NORMAL/UNDERPOWERED. Complementary, not agreeing.
+
+## Measured expression-tier limits (replaces back-of-envelope 20-33%)
+- spikein_lod: lod_any 0.2-0.3, lod_high 0.5 for 1q/12p/10p/18q; 17q 0.5/0.75. Depth 0.1-1x changes little. Grid-resolution upper bounds.
+- Null false calls per run: high 0.18-0.22, possible 2.3-3.3 (rises as depth falls). Prior estimate of 33% for 'high' was optimistic.
+- datasets.md truth table was read by eye from Fig 3.

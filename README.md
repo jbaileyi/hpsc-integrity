@@ -7,7 +7,7 @@ Screen human pluripotent stem cell (hPSC) RNA-seq for chromosome-arm gains and l
 - **Expression tiers** (`hpsc-integrity counts.csv -o out/`): per-arm log2 ratios against a leave-one-out baseline, called as `high` / `possible` / none. Gains and losses. Needs at least 3 samples.
 - **Allelic evidence** (add `--snps SAMPLE=snps.tsv`, repeatable): per-arm calls from major/minor allele ratios at heterozygous SNPs, with locus-level bootstrap CIs. States: `GAIN`, `NORMAL`, `UNDERPOWERED`, `REFUSED_HET_DEPLETED`, `TOO_FEW_SNPS`. Gains only; a loss depletes heterozygous sites instead of shifting ratios, so there is no `LOSS` state.
 
-## Validation (five hESC lines, GSE81402; three karyotype-confirmed gains)
+## Validation (five hESC lines, GSE81402; three gains per the G-banding in Weissbein et al. 2016 Fig 3)
 
 | Check | Result |
 |---|---|
@@ -15,7 +15,8 @@ Screen human pluripotent stem cell (hPSC) RNA-seq for chromosome-arm gains and l
 | Null arms | 0 `GAIN` calls in about 190 null arm-tests; 0 false GAINs elsewhere in every spike-in run |
 | Het-depleted regions | 9q in CSES9 and HUES14, and 16p in CSES22, refused |
 | Allelic spike-in detection limit | `GAIN` reliable at about 75% clone fraction in CSES9 and HUES14; 50% gives 0-50%; nothing at 30% or below |
-| Expression-tier mosaic limit | about 20-33% (provisional, from simulation and a back-of-envelope model) |
+| Expression-tier mosaic limit (spike-in, 3 lines, grid-resolution) | `possible` call from about 20-30% clone fraction, `high` from about 50% (1q, 12p, 10p, 18q); 17q needs about 50% / 75%. Depth 0.1-1x changes this little |
+| Expression-tier false calls (spike-in null) | about 0.2 `high` and 2.3-3.3 `possible` arms per sample (more at low depth) |
 
 ## Known limitations and failures
 
@@ -25,6 +26,7 @@ Screen human pluripotent stem cell (hPSC) RNA-seq for chromosome-arm gains and l
 - **19q refusals are an artifact** of the single-sample density metric (19q is low in all five lines). A per-arm expected-density table is not yet bundled.
 - **9q is likely long homozygosity (possible copy-neutral LOH), not a gain.** Unconfirmed.
 - **Arm-level only:** focal events such as 20q11.21 are not detectable. Losses are not called by the allelic module.
+- **Expression `high` calls are not reliable alone** (about 1 false `high` per 5 samples in the null simulation); treat them as leads to confirm.
 - **Expression and allelic evidence are not combined** into one call; they can disagree (e.g. CSES7 17p/17q).
 - The spike-in shift model matches one real trisomy (simulated f=1 about +0.43 vs real +0.43/+0.53).
 - CSES7's 51% alignment rate is unexplained.
