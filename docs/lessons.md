@@ -123,3 +123,17 @@
 - 9q: prediction (+/-0.15) WRONG. CSES9 +0.702 (65 SNPs), HUES14 +0.815 (85 SNPs), not seen in other 3 lines. Under investigation.
 - Robust SD (MAD, outliers removed): CSES22 0.047, HUES14 0.065, CSES9 0.083, CSES21 0.121, CSES7 0.123.
 - Earlier QC check of CSES7 alignment (50.9%) was invalid (sorted BAM head = chr1 only); redone with idxstats.
+
+## 9q diagnosis and bootstrap results
+- Hypothesis A (het depletion) MET for CSES9 and HUES14: 9q SNP share 0.25 / 0.27 of typical; chr9 ~70-110 Mb and ~135 Mb nearly
+  homozygous in both lines (het/total 0-1 per 5 Mb window) while the other three lines are normal; 9q expression log2 +0.026 / -0.029.
+- Interpretation: long homozygous / possible cnLOH on 9q, NOT a copy gain. Unconfirmed; allelic data alone cannot separate cnLOH from
+  other causes of homozygosity.
+- Lesson: median allelic ratio is invalid on het-depleted arms; the tool must flag het density and refuse to call such arms.
+- Other het-depleted arms: CSES22 16p (0.29), CSES21 21p (0.31). Not assessed in bootstrap (<50 SNPs after filter).
+- CSES7 unmapped reads: 49.0% of a 500k sample (matches BAM), diverse, not adapter/polyA. Likely non-human or low quality; not resolved.
+  CSES9 unmapped reads are mostly Illumina adapter (trimming). MT is 9.2% of mapped CSES7 reads.
+- Bootstrap (locus-level, 100 kb): CSES22 12q +0.529 [0.46, 0.60]; CSES21 21q +0.451 [0.26, 0.67];
+  CSES9 20q +0.032 [-0.15, 0.27]; CSES7 17p -0.164 [-0.27, -0.01], 17q +0.064 [-0.08, 0.23].
+- CSES9 20q: rule gives expression-only, but gain fraction up to ~40% not excluded. CSES7 chr17: no gain on both arms; clone <~35% on 17q not excluded.
+- New: CSES21 19p -0.22 [-0.28, -0.11], unexplained.
