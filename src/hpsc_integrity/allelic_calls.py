@@ -63,7 +63,6 @@ def call_arms(snps: pd.DataFrame, genes: pd.DataFrame, arms: pd.DataFrame, *, mi
     out["log2"] = pd.Series(np.log2(pt / np.median(pt)), index=elig)
     out["ci_lo"] = pd.Series(lo, index=elig)
     out["ci_hi"] = pd.Series(hi, index=elig)
-    out["gain_frac_hi95"] = np.clip(2 * (2 ** out["ci_hi"] - 1), 0, 1)
     call = pd.Series(state)
     for a in elig:
         call[a] = GAIN if out.at[a, "ci_lo"] > effect else NORMAL if out.at[a, "ci_hi"] < effect else UNDERPOWERED

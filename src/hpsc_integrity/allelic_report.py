@@ -42,6 +42,6 @@ def summarize(calls: pd.DataFrame, qc: pd.DataFrame) -> str:
         c = calls[calls["sample"] == r.sample]
         gains = list(c.loc[c["call"] == GAIN, "arm"])
         refused = list(c.loc[c["call"] == REFUSED, "arm"])
-        lines.append(f"  {r.sample}: GAIN {gains or 'none'}; refused (het-depleted) {refused or 'none'}; "
+        lines.append(f"  {r.sample}: GAIN {gains or 'none'}; refused (low het density) {refused or 'none'}; "
                      f"{r.frac_underpowered:.0%} of arms underpowered" + (f"  [{r.flags}]" if r.flags else ""))
     return "\n".join(lines)

@@ -189,3 +189,10 @@
 - Real CSES22 12p/12q log2 +0.43/+0.53; simulated f=1 (CSES9, HUES14) +0.42/+0.43. Simulation is ~0.05 lower (conservative). Compared
   two arms of one real line with a mean over three arms in two lines; one trisomy only.
 - CSES7 unmapped-read BLAST not run; CSES7 low alignment (50.9%) cause remains unresolved.
+
+## CLI allelic step: QC flag against prediction
+- Baseline median ratios: CSES9 1.434, CSES7 1.816, CSES22 1.404, CSES21 1.600, HUES14 1.402. Flag (> 1.6) hit only CSES7: prediction met,
+  but CSES21 sits exactly on the cutoff (marginal). Threshold rests on one flagged line; CSES21 still calls its real 21q GAIN, so 1.6 may be conservative.
+- CLI shows CSES7 and CSES21 19q as "refused (het-depleted)": known density-metric artifact (see density check), misleading to users until fixed.
+- gain_frac_hi95 still in allelic_calls.csv; unvalidated.
+- Allelic vs expression: expression flags CSES7 17p/17q, CSES9 20q as possible; allelic gives NORMAL/UNDERPOWERED. Complementary, not agreeing.
