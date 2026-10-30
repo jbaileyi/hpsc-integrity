@@ -205,3 +205,10 @@
 ## CSES7 unmapped reads: closed without resolution
 - Unmapped fraction 49.0% in a 500k sample (matches the BAM). Not adapter/polyA dominated; may be rRNA, mouse feeder, or low quality.
 - 40-read FASTA for BLAST written (results/qc/SRR3501466_unmapped_sample.fa) but never classified. Decision: not pursued; documented as a limitation.
+
+## Clone-fraction estimates, first validation (reps=1, n=3 per cell)
+- P1 coverage 0.889 (n=36; too few runs to confirm calibration). P2 met (CSES9/HUES14 MAE 0.04-0.13 at f>=0.5). P3 met barely (width 0.40-0.49).
+- P4 FAILED: CSES7 f=0.3 gave width 0.00, coverage 0.33 (confidently wrong, not uninformative).
+- P5 met (12p 0.89, 12q 1.0, 21q 1.0). P6 met by count (6 <= 8) but 3 of 6 are CSES7 3q/14q/15q with f_lo = 1.0 on arms called NORMAL/UNDERPOWERED:
+  likely a flat curve mapping any positive log2 to 1.0. Count alone hides this.
+- CSES21 curve peaks at +0.27 at f=1 while real 21q is +0.45: simulated shift under-predicts real; CI ignores curve uncertainty, so f_lo=0.987 is overconfident.
