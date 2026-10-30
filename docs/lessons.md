@@ -218,3 +218,8 @@
   Q3 mostly met (widths 0.27-0.56; f=1 slightly narrower than predicted). Q4 met (12p f_lo 0.63, 12q 0.90, 21q 0.75). Q5 met (1 null arm: CSES21 2q f_lo 0.19).
 - Caveats: spike-in uses the same shift model as the calibration (partly self-testing); wide CIs cover easily; replicates share lines and arms; all real positives are full gains,
   so partial-fraction accuracy has no model-independent validation. CSES21 21q saturates at 1.0 (real +0.45 exceeds simulated f=1 +0.27).
+
+## Clone-fraction gate diagnostic (10 seeds, 6 donors)
+- Median-curve max: CSES9 0.36-0.49, HUES14 0.41-0.53, CSES22 0.41-0.50, CSES21 0.22-0.34 (all 10/10 >= 0.15); CSES7 0.001-0.158, 1/10 >= 0.15.
+- Predictions met (CSES7 1/10). Spread overlaps threshold: the 4/36 CSES7 spike-in passes are gate noise from random donor choice.
+- p20-curve: CSES7 max 0.049, CSES21 min 0.070 (separation too thin to rely on). Curve size tracks baseline ratio (1.82 -> 0.07, 1.60 -> 0.30, ~1.4 -> 0.45): 5 points, untested.

@@ -202,3 +202,8 @@
   CSES7: >= 0.15 in at most 2/10 (but not 0/10, since 4/36 spike-in runs passed the gate).
 - If CSES7 seed spread overlaps 0.15, the gate needs more donors and a stricter rule (e.g. also require the 20th-percentile curve to exceed a floor).
   Any threshold fitted on five lines is in-sample and must be labelled so.
+
+## Gate fix attempt: more calibration donors (written BEFORE running)
+- Change only n_donors 6 -> 15 (or all eligible arms if fewer). Threshold stays 0.15 (provisional, in-sample).
+- Predictions over 10 seeds: CSES7 median-curve max stays < 0.15 in 10/10 (its median is 0.074; spread should shrink); CSES9, HUES14, CSES22, CSES21 stay >= 0.15 in 10/10.
+- If CSES7 still reaches 0.15 in any seed, the gate needs a second condition, labelled in-sample.
