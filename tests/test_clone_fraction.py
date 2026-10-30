@@ -29,3 +29,13 @@ def test_flat_curve_gives_no_estimate():
     res = call_arms(snps, genes, arms, n_boot=300)
     est, _ = estimate_clone_fractions(snps, genes, arms, res, f_grid=(0.5, 1.0), n_donors=3, n_boot=20, min_curve=10.0)
     assert est["f_hat"].isna().all() and (est["note"] == "UNRESOLVABLE_NOISY_SAMPLE").all()
+
+
+def test_add_clone_fractions_display_rule():
+    from hpsc_integrity.clone_fraction import add_clone_fractions
+    snps, genes, arms = _synthetic()
+    res = call_arms(snps, genes, arms, n_boot=300)
+    out = add_clone_fractions(snps, genes, arms, res, f_grid=(0.5, 1.0), n_donors=3, n_boot=20)
+    assert out.at["3q", "f_lo"] > 0.3 and out.at["3q", "f_hat"] > 0.5
+    assert out.drop(index="3q")["f_lo"].isna().all() and out.drop(index="3q")["f_hat"].isna().all()
+    assert out["f_hi"].notna().sum() >= 8 and out.at["5q", "f_hi"] != out.at["5q", "f_hi"]

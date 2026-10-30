@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hpsc-integrity"
-version = "0.0.2"
+version = "0.0.3"
 description = "Detect recurrent chromosomal abnormalities in human pluripotent stem cell cultures from bulk RNA-seq"
 readme = "README.md"
 requires-python = ">=3.9"

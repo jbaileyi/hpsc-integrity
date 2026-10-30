@@ -227,3 +227,15 @@
 ## Gate fix: 15 calibration donors (10 seeds)
 - Median-curve max: CSES7 0.000-0.079 (0/10 >= 0.15; was 1/10, max 0.158), CSES21 0.248-0.355 (10/10), CSES9 0.412-0.486 (10/10). Predictions met.
 - Only three lines re-run (HUES14, CSES22 not). 0.15 threshold remains in-sample (five lines).
+
+## Clone-fraction validation, n_donors=15, reps=3
+- R1 met (CSES7 resolved 0/36). R2 met (coverage 0.972, 70/72). R3 marginal fail (widths 0.32-0.67; f=0.5 cells grew to 0.67/0.58). R4 met (12p f_lo 0.65, 12q 0.95, 21q 0.78, f_hi 1).
+- R5 half failed: 1 null arm but CSES21 2q f_lo = 0.36 (> 0.3). CSES21 curve flat at low f (0.03 at f=0.5): small log2 maps to a large fraction; arm-level offsets not in the CI. Untested hypothesis.
+- Resolution: arms not called GAIN report only f_hi (what is excluded), not f_hat/f_lo.
+- Intervals at f=0.5 are ~0.6 wide: coarse. Useful as lower bound for large gains and upper bound for exclusion.
+
+## Clone fraction wired into CLI (--clone-fraction); display rule vs predictions
+- Met: GAIN arms f_lo 0.67/0.95/0.77; 0 non-GAIN rows with f_lo; CSES7 UNRESOLVABLE on 37/37 arms. 45 tests pass.
+- Partly failed: clean-line non-GAIN f_hi medians 0.50 (HUES14), 0.56 (CSES22), 0.68 (CSES9), not <= 0.5; CSES21 0.99.
+- Same trisomies gave f_lo 0.65/0.95/0.78 in validation vs 0.67/0.95/0.77 in CLI: ~±0.02 calibration noise from random donor choice.
+- Reading: arm-level allelic evidence excludes clones only above ~50-70% on clean lines, ~100% on CSES21; consistent with the ~75% spike-in limit.

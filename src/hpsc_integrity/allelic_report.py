@@ -3,6 +3,7 @@ import pandas as pd
 
 from .allelic import arm_allelic_table, filter_het_snps, read_allele_counts
 from .allelic_calls import GAIN, NORMAL, REFUSED, UNDERPOWERED, call_arms
+from .clone_fraction import add_clone_fractions
 
 BASELINE_RATIO_WARN = 1.6   # provisional, set from one line (CSES7); a high baseline compresses the effect of a gain
 
@@ -19,12 +20,14 @@ def parse_specs(specs) -> dict:
     return out
 
 
-def run_allelic(specs, genes, arms, baseline_warn: float = BASELINE_RATIO_WARN):
+def run_allelic(specs, genes, arms, baseline_warn: float = BASELINE_RATIO_WARN, clone_fraction: bool = False):
     """Returns (calls, qc): calls has one row per sample and arm; qc one row per sample."""
     calls, qc = [], []
     for name, path in parse_specs(specs).items():
         snps = filter_het_snps(read_allele_counts(path))
         res = call_arms(snps, genes, arms)
+        if clone_fraction:
+            res = add_clone_fractions(snps, genes, arms, res)
         baseline = float(arm_allelic_table(snps, arms)[1])
         assessed = res["call"].isin([GAIN, NORMAL, UNDERPOWERED])
         calls.append(res.rename_axis("arm").reset_index().assign(sample=name))
@@ -40,7 +43,8 @@ def summarize(calls: pd.DataFrame, qc: pd.DataFrame) -> str:
     lines = ["Allelic evidence (arm-level; detects large clones only, see README):"]
     for r in qc.itertuples():
         c = calls[calls["sample"] == r.sample]
-        gains = list(c.loc[c["call"] == GAIN, "arm"])
+        g = c.loc[c["call"] == GAIN]
+        gains = [f"{r.arm} (clone {r.f_lo:.0%}-{r.f_hi:.0%})" if "f_lo" in g.columns and r.f_lo == r.f_lo else r.arm for r in g.itertuples()]
         refused = list(c.loc[c["call"] == REFUSED, "arm"])
         lines.append(f"  {r.sample}: GAIN {gains or 'none'}; refused (low het density) {refused or 'none'}; "
                      f"{r.frac_underpowered:.0%} of arms underpowered" + (f"  [{r.flags}]" if r.flags else ""))

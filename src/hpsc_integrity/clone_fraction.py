@@ -78,3 +78,23 @@ def estimate_clone_fractions(snps, genes, arms, res=None, *, min_curve=MIN_CURVE
                          f_lo=_to_fraction(r["ci_lo"], fs, hi), f_hi=_to_fraction(r["ci_hi"], fs, lo),
                          note="UPPER_UNBOUNDED" if r["ci_hi"] >= lo[-1] else ""))
     return pd.DataFrame(rows).set_index("arm").round(3), {round(float(f), 2): round(float(y), 3) for f, y in zip(fs, med)}
+
+
+def add_clone_fractions(snps, genes, arms, res, **kw):
+    """Add f_hat, f_lo, f_hi, f_note to a call_arms table. f_hat/f_lo only for GAIN arms; f_hi (the clone size not excluded) for all assessed arms."""
+    from .allelic_calls import GAIN
+    out = res.copy()
+    for c in ("f_hat", "f_lo", "f_hi"):
+        out[c] = np.nan
+    out["f_note"] = ""
+    try:
+        est, _ = estimate_clone_fractions(snps, genes, arms, res, **kw)
+    except ValueError:
+        out["f_note"] = "NO_CALIBRATION"
+        return out
+    for a, r in est.iterrows():
+        out.at[a, "f_hi"] = r["f_hi"]
+        if r["call"] == GAIN:
+            out.at[a, "f_hat"], out.at[a, "f_lo"] = r["f_hat"], r["f_lo"]
+        out.at[a, "f_note"] = r["note"]
+    return out

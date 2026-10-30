@@ -34,6 +34,8 @@ def main(argv=None):
     p.add_argument("--arms", help="arm boundary CSV (default: bundled hg38)")
     p.add_argument("--snps", action="append", metavar="SAMPLE=PATH", default=[],
                    help="optional: per-sample heterozygous-SNP allele counts (bcftools query output); repeat per sample")
+    p.add_argument("--clone-fraction", action="store_true",
+                   help="with --snps: add clone-fraction bounds per arm (slow; simulates gains to calibrate each sample)")
     p.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     args = p.parse_args(argv)
 
@@ -54,7 +56,7 @@ def main(argv=None):
     qc.to_csv(out / "qc.csv")
     if args.snps:
         try:
-            a_calls, a_qc = run_allelic(args.snps, genes, arms)
+            a_calls, a_qc = run_allelic(args.snps, genes, arms, clone_fraction=args.clone_fraction)
         except (ValueError, FileNotFoundError) as e:
             p.error(str(e))
         a_calls.to_csv(out / "allelic_calls.csv", index=False)

@@ -217,3 +217,8 @@
   R4 real trisomies: 12p/12q f_lo >= 0.5 with f_hi = 1; 21q resolved.
   R5 null arms: at most 4 with f_lo > 0.1, none above 0.3.
 - Failure rule: coverage < 75% means do not wire the estimates into the CLI.
+
+## Clone-fraction display rule and CLI flag (written BEFORE running)
+- f_hat and f_lo shown only for arms called GAIN; all assessed arms show f_hi. CLI flag --clone-fraction (off by default; slow).
+- Predictions on the five real lines: GAIN arms show f_lo >= 0.5 (12p, 12q, 21q); no non-GAIN arm shows an f_lo; CSES7 shows UNRESOLVABLE_NOISY_SAMPLE on all arms.
+  Expected non-GAIN f_hi: wide (>= 0.8) on most arms in CSES7/CSES21; at most 0.5 on many arms in CSES9 and HUES14.
