@@ -246,3 +246,9 @@
 - Cause of the misses: window 151 exceeds SNP count of the small arms (21q 141, CSES9 9q 65, HUES14 9q 85), so windows never sit inside the arm. A limit of our rule, not of eSNP-Karyotyping itself.
 - Read: a ratio-only rule made no false calls elsewhere (matches our 0 false GAIN) and called HUES14 9q raised (het-depleted region read as a gain). Not shown: how eSNP's own LOH tools or CaSpER handle 9q (not run).
 - This tests our rule on eSNP's statistic with identical allelic input; it does not test the published tool's own interpretation.
+
+## Head-to-head exploratory window sweep (window 51; post-hoc, not primary)
+- Predictions written after seeing the primary result and its explanation, so the first two were close to guaranteed. Window 151 rerun reproduces the primary result.
+- Met: 21q raised in CSES21; 9q raised in both HUES14 and CSES9. Failed: no other arm raised in any line (0 vs predicted >= 1).
+- Window 51 raised 12p, 12q (CSES22), 21q (CSES21), 9q (HUES14, CSES9), nothing in CSES7. Differences from hpsc-integrity: it refuses the two 9q arms; trisomy detection and specificity were equivalent on this input.
+- Not shown: eSNP-Karyotyping's own interpretation or LOH tools, CaSpER.

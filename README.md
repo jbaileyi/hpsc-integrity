@@ -33,6 +33,12 @@ Screen human pluripotent stem cell (hPSC) RNA-seq for chromosome-arm gains and l
 - The spike-in shift model matches one real trisomy (simulated f=1 about +0.43 vs real +0.43/+0.53).
 - CSES7's 51% alignment rate is unexplained. Unmapped reads were not adapter, polyA or all-N dominated (a sample was written to `results/qc/` for BLAST but not classified). Cause not investigated further.
 
+## Comparison with eSNP-Karyotyping (partial)
+
+eSNP-Karyotyping's allelic statistic (`MajorMinorCalc`, depth >= 20, minor allele >= 0.2) was run on the same SNP calls, and a fixed numeric rule written for this comparison (moving median of the major/minor ratio; an arm is raised if at least half its windows exceed 1.25x the sample baseline) was applied. With a 151-SNP window it raised 12p and 12q in CSES22 and 9q in HUES14, and missed CSES21 21q and CSES9 9q because those arms have fewer SNPs than the window. With a 51-SNP window (chosen after seeing this, so exploratory) it raised 12p, 12q, 21q and 9q in both CSES9 and HUES14, with no other arm raised. On identical input, then, a ratio-only rule finds the three known gains with no false calls elsewhere, but also reports the het-depleted 9q regions as raised, which hpsc-integrity refuses.
+
+This tests a rule written for the comparison, not eSNP-Karyotyping's own plot interpretation or its LOH tools. CaSpER was not run. Blinding was weak (baselines identify the lines) and hpsc-integrity was developed on these lines. Details: `docs/design.md` (amendments 1-4) and `docs/lessons.md`.
+
 ## Development record
 
 Predictions were written to `docs/design.md` before each experiment, and results, including failures, are in `docs/lessons.md`.
