@@ -223,3 +223,7 @@
 - Median-curve max: CSES9 0.36-0.49, HUES14 0.41-0.53, CSES22 0.41-0.50, CSES21 0.22-0.34 (all 10/10 >= 0.15); CSES7 0.001-0.158, 1/10 >= 0.15.
 - Predictions met (CSES7 1/10). Spread overlaps threshold: the 4/36 CSES7 spike-in passes are gate noise from random donor choice.
 - p20-curve: CSES7 max 0.049, CSES21 min 0.070 (separation too thin to rely on). Curve size tracks baseline ratio (1.82 -> 0.07, 1.60 -> 0.30, ~1.4 -> 0.45): 5 points, untested.
+
+## Gate fix: 15 calibration donors (10 seeds)
+- Median-curve max: CSES7 0.000-0.079 (0/10 >= 0.15; was 1/10, max 0.158), CSES21 0.248-0.355 (10/10), CSES9 0.412-0.486 (10/10). Predictions met.
+- Only three lines re-run (HUES14, CSES22 not). 0.15 threshold remains in-sample (five lines).

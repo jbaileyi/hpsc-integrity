@@ -27,7 +27,7 @@ def apply_gain(base: pd.DataFrame, idx, f: float, rng) -> pd.DataFrame:
     return d
 
 
-def response_curve(snps, genes, arms, res, *, f_grid=F_GRID, n_donors=6, n_boot=20, seed=1, exclude=()):
+def response_curve(snps, genes, arms, res, *, f_grid=F_GRID, n_donors=15, n_boot=20, seed=1, exclude=()):
     """Log2 change when a gain of fraction f is simulated on a normal arm. Returns (f, median, p20, p80), each monotone."""
     base = snps[["chrom", "pos", "ref_n", "alt_n"]].reset_index(drop=True)
     arm_of = assign_snp_arms(base, arms).to_numpy()

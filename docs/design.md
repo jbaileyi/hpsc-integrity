@@ -207,3 +207,13 @@
 - Change only n_donors 6 -> 15 (or all eligible arms if fewer). Threshold stays 0.15 (provisional, in-sample).
 - Predictions over 10 seeds: CSES7 median-curve max stays < 0.15 in 10/10 (its median is 0.074; spread should shrink); CSES9, HUES14, CSES22, CSES21 stay >= 0.15 in 10/10.
 - If CSES7 still reaches 0.15 in any seed, the gate needs a second condition, labelled in-sample.
+
+## Clone-fraction validation with n_donors=15 (written BEFORE running; reps=3)
+- Change: response_curve default n_donors 6 -> 15. Threshold 0.15 unchanged.
+- Predictions:
+  R1 CSES7 resolved in <= 1 of 36 spike-in runs (previously 4/36), and any resolved run covers the truth.
+  R2 coverage among resolved runs >= 85% (previously 0.947).
+  R3 CSES9/HUES14 widths at f >= 0.5 not larger than before (0.27-0.56), because curves are less noisy.
+  R4 real trisomies: 12p/12q f_lo >= 0.5 with f_hi = 1; 21q resolved.
+  R5 null arms: at most 4 with f_lo > 0.1, none above 0.3.
+- Failure rule: coverage < 75% means do not wire the estimates into the CLI.
