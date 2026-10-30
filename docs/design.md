@@ -222,3 +222,16 @@
 - f_hat and f_lo shown only for arms called GAIN; all assessed arms show f_hi. CLI flag --clone-fraction (off by default; slow).
 - Predictions on the five real lines: GAIN arms show f_lo >= 0.5 (12p, 12q, 21q); no non-GAIN arm shows an f_lo; CSES7 shows UNRESOLVABLE_NOISY_SAMPLE on all arms.
   Expected non-GAIN f_hi: wide (>= 0.8) on most arms in CSES7/CSES21; at most 0.5 on many arms in CSES9 and HUES14.
+
+## Head-to-head: eSNP-Karyotyping and CaSpER vs hpsc-integrity (written BEFORE running)
+- Data: the five GSE81402 lines. Truth (G-banding, Weissbein Fig 3, read by eye): CSES22 +12, CSES21 +21; CSES9, CSES7, HUES14 normal.
+  Unadjudicated, not scored as true or false: CSES7 chr17, CSES9 chr20 (expression shifts), 9q (het-depleted; possible cnLOH).
+- Each tool run with default settings, no tuning on these lines. Bias to state: hpsc-integrity was developed on these lines, the others were not.
+- CaSpER controls: for each test line, the three G-banding-diploid lines minus itself (CSES9, CSES7, HUES14; the same line is never its own control). Decided before seeing output.
+- Measured per tool: (a) the three known trisomic arms called (12p, 12q, 21q); (b) arm-sized (>= 1 arm) gain/loss events on other chromosomes, counted per line; (c) what is reported at 9q in CSES9 and HUES14; (d) whether any clone-fraction or cell-fraction output exists.
+- Predictions (low confidence on B2 and B4):
+  B1 both tools call chr12 in CSES22 and chr21 in CSES21.
+  B2 eSNP-Karyotyping flags 9q as aberrant in at least one of CSES9, HUES14; CaSpER reports it as LOH or no CNV, not a gain.
+  B3 neither tool reports a clone fraction with an interval. If either does, our clone-fraction feature is not distinctive and the README says so.
+  B4 CaSpER makes >= 3 arm-sized events on other chromosomes across the five lines; hpsc-integrity makes 0 GAIN calls there.
+- Decision rules: (1) a tool that handles 9q without a gain call means refusal logic is not a differentiator; say so. (2) a tool that misses a trisomy we call is reported with its settings. (3) results go in the README either way, in-sample caveat attached.
