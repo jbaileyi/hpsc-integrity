@@ -173,3 +173,15 @@
 - Prediction: CSES7 flagged; CSES9, CSES22, CSES21, HUES14 not. If step 1 shows CSES21 above 1.6, the threshold is not specific to CSES7.
 - Licence TODO resolved on 2026-10-29: terms recorded in SOURCES.txt.
 - 2026-10-29: licence TODO resolved. Provider terms read and recorded in SOURCES.txt (Ensembl: no restrictions; UCSC: free, cytoBand not in the restricted list, cite UCSC).
+
+## Clone-fraction estimates (allelic): written BEFORE running
+- Method: per-sample response curve (shift f simulated on that sample's own normal arms, median log2 change per f); the arm's log2 and bootstrap CI are inverted through it.
+- Predictions, spike-in on CSES9/HUES14 (arms 1q, 12q, 20p; f = 0.3, 0.5, 0.75, 1.0):
+  P1 the 95% CI covers the true f in >= 85% of runs overall (nominal 95%; calibration noise is not in the CI).
+  P2 at f = 1, estimate >= 0.8 and upper bound = 1.0; mean absolute error <= 0.2 for f >= 0.5.
+  P3 expected weakness: median CI width >= 0.4 at f <= 0.5 (limited resolution at arm level).
+  P4 CSES7: median width >= 0.8 (curve nearly flat), reported as uninformative, not wrong.
+- Predictions, real data:
+  P5 CSES22 12p/12q and CSES21 21q (G-banding trisomies): estimate >= 0.7, upper bound = 1.0.
+  P6 null arms (about 190, five lines, known gains excluded): at most 8 with lower bound > 0.1 (95% CIs allow ~2.5% one-sided exceedance by chance).
+- Failure rule: overall coverage < 75% means the CI is wrong, and it will not be added to the CLI.
