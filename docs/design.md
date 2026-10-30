@@ -235,3 +235,13 @@
   B3 neither tool reports a clone fraction with an interval. If either does, our clone-fraction feature is not distinctive and the README says so.
   B4 CaSpER makes >= 3 arm-sized events on other chromosomes across the five lines; hpsc-integrity makes 0 GAIN calls there.
 - Decision rules: (1) a tool that handles 9q without a gain call means refusal logic is not a differentiator; say so. (2) a tool that misses a trisomy we call is reported with its settings. (3) results go in the README either way, in-sample caveat attached.
+
+## Head-to-head amendment 1 (written BEFORE any tool is run)
+- eSNP-Karyotyping, route B: use only its analysis functions on our own SNP calls (HISAT2 GRCh38 reads, bcftools calls), not its Tophat2/GATK pipeline.
+  MajorMinorCalc minDP=20, maxDP=very large, minAF=0.2 (same filter as ours); PlotGenome Window=151, PValue=TRUE.
+- eSNP gives plots, not calls. Measure (b) is replaced: the five PlotGenome images are renamed with random IDs, shuffled, and read blind by the project owner,
+  who lists chromosomes that look gained. The key is opened after the readings are recorded. Ours-vs-theirs is then compared on chromosomes read as gained.
+- eSNP's LOH tool (DeletionTable, Plot_Zygosity_*) needs dbSNP 142 files (build likely hg19, unverified) and is NOT run. Decision rule (1) is therefore restricted:
+  9q can only be judged on the allelic-ratio plot, and the README will say eSNP's LOH tools exist and were not run.
+- Bias to state: the allelic input is nearly identical (same depth and minor-allele thresholds), so differences are in summarisation and calling, not data.
+- CaSpER: BAFExtract on our BAMs (hg38), controls and settings as pre-registered. Calls read from its segment output at arm level.
