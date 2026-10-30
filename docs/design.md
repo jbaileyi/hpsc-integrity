@@ -255,3 +255,16 @@
   Readings are committed to results/benchmark/esnp_readings.txt BEFORE the key is opened. Limitation: the reader knows two of the five lines are trisomic, so blinding to line identity only partly removes bias.
 - Predictions: the reader marks chr12 in one image and chr21 in another (B1); also marks at least one other chromosome as raised somewhere (hand-reading is generous).
 - CaSpER: not started. Needs hg38 annotation/cytoband and BAFExtract pileups; set up only after the code is read.
+
+## Head-to-head amendment 3: numeric reading replaces visual reading (written BEFORE any numeric output)
+- eSNP-Karyotyping's MajorMinorCalc (minDP=20, maxDP=1e9, minAF=0.2) is run in R and its output saved; the visual reading plan is dropped.
+- Numeric rule, applied by script to autosomes only: moving median of the major/minor ratio over genome-ordered SNPs, window 151 (as PlotGenome);
+  baseline = median of all window values; each window is assigned to the arm of its centre SNP (GRCh38 arms from the package, not PlotGenome's hg19 table);
+  an arm is "raised" if it has >= 30 SNPs and >= 50% of its windows exceed 1.25 x baseline. The thresholds are fixed now and are not tuned afterwards.
+- Lines stay shuffled (S1..S5; key ~/benchmark_key.csv unopened) until the numeric results are committed.
+- Predictions (B2 and B4 are low confidence):
+  B1 arms 12p and 12q raised in one image, 21q in another, and no other trisomy arms.
+  B2 9q raised in two images (CSES9 and HUES14): this ratio-only reading has no het-density check, so het-depleted arms look like gains.
+  B4 at least 2 other arms raised across the five images (the rule has no confidence interval, so noisy lines should produce some).
+- Limitations: this tests a calling rule written by us on eSNP's statistic, not the published tool's own interpretation. hpsc-integrity was developed on these lines; the rule here was not.
+- CaSpER is still not run.
