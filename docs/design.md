@@ -195,3 +195,10 @@
   Q4 real trisomies: CSES22 12p/12q f_lo >= 0.5 and f_hi = 1; CSES21 21q resolved with f_hi = 1.
   Q5 null arms: at most 4 with f_lo > 0.1 across the five lines, none above 0.3.
 - Failure rule: coverage < 75% -> the interval is wrong; do not add it to the CLI.
+
+## Clone-fraction gate diagnostic (written BEFORE running)
+- Question: is the response-curve max (f=1) stable across calibration seeds?
+- Predictions over 10 seeds per line: CSES9, HUES14, CSES22: curve max >= 0.15 in 10/10; CSES21 (curve 0.27): 10/10;
+  CSES7: >= 0.15 in at most 2/10 (but not 0/10, since 4/36 spike-in runs passed the gate).
+- If CSES7 seed spread overlaps 0.15, the gate needs more donors and a stricter rule (e.g. also require the 20th-percentile curve to exceed a floor).
+  Any threshold fitted on five lines is in-sample and must be labelled so.

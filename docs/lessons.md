@@ -212,3 +212,9 @@
 - P5 met (12p 0.89, 12q 1.0, 21q 1.0). P6 met by count (6 <= 8) but 3 of 6 are CSES7 3q/14q/15q with f_lo = 1.0 on arms called NORMAL/UNDERPOWERED:
   likely a flat curve mapping any positive log2 to 1.0. Count alone hides this.
 - CSES21 curve peaks at +0.27 at f=1 while real 21q is +0.45: simulated shift under-predicts real; CI ignores curve uncertainty, so f_lo=0.987 is overconfident.
+
+## Clone-fraction fix, reps=3
+- Q1 FAILED: CSES7 resolved in 4/36 spike-in runs, 2 of those missed the truth (one width 0.00). Q2 met (coverage 0.947, 72/76; CSES9+HUES14 70/72).
+  Q3 mostly met (widths 0.27-0.56; f=1 slightly narrower than predicted). Q4 met (12p f_lo 0.63, 12q 0.90, 21q 0.75). Q5 met (1 null arm: CSES21 2q f_lo 0.19).
+- Caveats: spike-in uses the same shift model as the calibration (partly self-testing); wide CIs cover easily; replicates share lines and arms; all real positives are full gains,
+  so partial-fraction accuracy has no model-independent validation. CSES21 21q saturates at 1.0 (real +0.45 exceeds simulated f=1 +0.27).
