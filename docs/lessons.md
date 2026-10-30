@@ -239,3 +239,10 @@
 - Partly failed: clean-line non-GAIN f_hi medians 0.50 (HUES14), 0.56 (CSES22), 0.68 (CSES9), not <= 0.5; CSES21 0.99.
 - Same trisomies gave f_lo 0.65/0.95/0.78 in validation vs 0.67/0.95/0.77 in CLI: ~±0.02 calibration noise from random donor choice.
 - Reading: arm-level allelic evidence excludes clones only above ~50-70% on clean lines, ~100% on CSES21; consistent with the ~75% spike-in limit.
+
+## Head-to-head, eSNP-Karyotyping statistic with numeric rule (primary result, window 151)
+- Key: S1 CSES22, S2 CSES21, S3 HUES14, S4 CSES9, S5 CSES7. Blinding was weak (baselines 1.40/1.60/1.41/1.44/1.86 identify the lines).
+- B1 half met: chr12 raised in CSES22; 21q NOT raised in CSES21. B2 failed: 9q raised in HUES14 only, not CSES9. B4 failed: 0 other arms raised in any line.
+- Cause of the misses: window 151 exceeds SNP count of the small arms (21q 141, CSES9 9q 65, HUES14 9q 85), so windows never sit inside the arm. A limit of our rule, not of eSNP-Karyotyping itself.
+- Read: a ratio-only rule made no false calls elsewhere (matches our 0 false GAIN) and called HUES14 9q raised (het-depleted region read as a gain). Not shown: how eSNP's own LOH tools or CaSpER handle 9q (not run).
+- This tests our rule on eSNP's statistic with identical allelic input; it does not test the published tool's own interpretation.

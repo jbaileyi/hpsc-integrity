@@ -1,11 +1,13 @@
 """Numeric reading of eSNP-Karyotyping MajorMinorCalc output (rule pre-registered in docs/design.md, amendment 3).
 python scripts/bench_esnp_numeric.py  -> results/benchmark/esnp_numeric.csv"""
+import sys
 from pathlib import Path
 import numpy as np, pandas as pd
 from hpsc_integrity.allelic import assign_snp_arms
 from hpsc_integrity.annotation import load_reference
 
-W, FACTOR, MIN_FRAC, MIN_SNPS = 151, 1.25, 0.5, 30
+W = int(sys.argv[1]) if len(sys.argv) > 1 else 151
+FACTOR, MIN_FRAC, MIN_SNPS = 1.25, 0.5, 30
 _, arms = load_reference()
 rows = []
 for f in sorted(Path("results/benchmark/esnp_mm").glob("S*.csv")):
@@ -22,6 +24,6 @@ for f in sorted(Path("results/benchmark/esnp_mm").glob("S*.csv")):
                          frac_above=round(frac, 2), baseline=round(float(base), 3),
                          raised=bool(len(g) >= MIN_SNPS and frac >= MIN_FRAC)))
 R = pd.DataFrame(rows)
-R.to_csv("results/benchmark/esnp_numeric.csv", index=False)
+R.to_csv("results/benchmark/esnp_numeric.csv" if W == 151 else f"results/benchmark/esnp_numeric_w{W}.csv", index=False)
 for i, g in R.groupby("id"):
     print(i, "baseline", g.baseline.iloc[0], "| raised arms:", list(g.loc[g.raised, "arm"]) or "none")

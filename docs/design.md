@@ -268,3 +268,8 @@
   B4 at least 2 other arms raised across the five images (the rule has no confidence interval, so noisy lines should produce some).
 - Limitations: this tests a calling rule written by us on eSNP's statistic, not the published tool's own interpretation. hpsc-integrity was developed on these lines; the rule here was not.
 - CaSpER is still not run.
+
+## Head-to-head amendment 4: exploratory window sweep (written BEFORE running; NOT the primary result)
+- Primary result (window 151) is final and logged. This run changes only the window (51) and is labelled post-hoc exploratory, since it was chosen after seeing the primary result.
+- Predictions: 21q raised in CSES21 (S2); 9q raised in both HUES14 and CSES9; at least 1 other arm raised across the five images (a smaller window is noisier).
+- Failure of these predictions is reported the same way.
