@@ -172,3 +172,4 @@
   CSES7 only (arm medians 1.66-1.88 vs 1.35-1.6 in CSES9/HUES14; CSES22 baseline 1.404).
 - Prediction: CSES7 flagged; CSES9, CSES22, CSES21, HUES14 not. If step 1 shows CSES21 above 1.6, the threshold is not specific to CSES7.
 - Licence TODO resolved on 2026-10-29: terms recorded in SOURCES.txt.
+- 2026-10-29: licence TODO resolved. Provider terms read and recorded in SOURCES.txt (Ensembl: no restrictions; UCSC: free, cytoBand not in the restricted list, cite UCSC).

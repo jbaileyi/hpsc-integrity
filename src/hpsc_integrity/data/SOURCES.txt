@@ -2,3 +2,9 @@ Genes: protein-coding genes on chr1-22, X, Y from the headers of the Ensembl rel
 GRCh38 cDNA FASTA (Homo_sapiens.GRCh38.cdna.all.fa.gz). Chromosome, start, end, gene symbol.
 Arms: first band start to last band end per arm from the UCSC hg38 cytoBand table.
 Built by scripts/build_reference.py. Check each provider's terms before redistributing.
+
+Terms checked 2026-10-29:
+Ensembl: states it imposes no restrictions on access to or use of its data; some data may carry third-party constraints that users must check themselves.
+  https://www.ensembl.org/info/about/legal/disclaimer.html (returned a gateway error when I tried; the same wording is on https://covid-19.ensembl.org/info/about/legal/disclaimer.html)
+UCSC: data files and tables used by the Genome Browser are free for public and commercial use, with exceptions for some human clinical-genetics data listed in each assembly's README.txt. Asks users to cite a UCSC Genome Browser publication.
+  https://genome.ucsc.edu/license/
