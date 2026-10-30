@@ -19,6 +19,13 @@ def test_synthetic_full_gain_estimate():
     snps, genes, arms = _synthetic()
     res = call_arms(snps, genes, arms, n_boot=300)
     est, curve = estimate_clone_fractions(snps, genes, arms, res, f_grid=(0.5, 1.0), n_donors=3, n_boot=20)
-    assert est.at["3q", "f_hi"] == 1.0 and est.at["3q", "f_lo"] > 0.4
+    assert est.at["3q", "f_hi"] == 1.0 and est.at["3q", "f_lo"] > 0.3
     assert (est.drop(index="3q")["f_lo"] > 0.3).sum() == 0
     assert curve[1.0] > curve[0.5] > 0
+
+
+def test_flat_curve_gives_no_estimate():
+    snps, genes, arms = _synthetic()
+    res = call_arms(snps, genes, arms, n_boot=300)
+    est, _ = estimate_clone_fractions(snps, genes, arms, res, f_grid=(0.5, 1.0), n_donors=3, n_boot=20, min_curve=10.0)
+    assert est["f_hat"].isna().all() and (est["note"] == "UNRESOLVABLE_NOISY_SAMPLE").all()

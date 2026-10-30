@@ -32,11 +32,13 @@ for li, line in enumerate(["CSES9", "HUES14", "CSES7"]):
                     rows.append(dict(line=line, arm=arm, f=f, rep=rep, call=e["call"], f_hat=e["f_hat"], f_lo=e["f_lo"], f_hi=e["f_hi"], note=e["note"]))
     print(line, "done", flush=True)
 A = pd.DataFrame(rows)
-A["covered"] = (A.f_lo <= A.f) & (A.f <= A.f_hi); A["width"] = A.f_hi - A.f_lo; A["abs_err"] = (A.f_hat - A.f).abs()
+A["resolved"] = A.f_hat.notna(); A["covered"] = (A.f_lo <= A.f) & (A.f <= A.f_hi); A["width"] = A.f_hi - A.f_lo; A["abs_err"] = (A.f_hat - A.f).abs()
 out = Path("results/simulation"); out.mkdir(parents=True, exist_ok=True); A.to_csv(out / "clonefrac_spikein.csv", index=False)
 print("\nPart A: by line and f (coverage, mean abs error, median CI width)")
-print(A.groupby(["line", "f"]).agg(coverage=("covered", "mean"), mae=("abs_err", "mean"), width=("width", "median"), n=("f", "size")).round(2).to_string())
-print("\nOverall coverage:", round(A.covered.mean(), 3), "| n runs:", len(A))
+R = A[A.resolved]
+print(R.groupby(["line", "f"]).agg(coverage=("covered", "mean"), mae=("abs_err", "mean"), width=("width", "median"), n=("f", "size")).round(2).to_string())
+print("fraction of runs resolved:", A.groupby("line").resolved.mean().round(2).to_dict())
+print("\nCoverage among resolved runs:", round(R.covered.mean(), 3) if len(R) else "n/a", "| resolved:", len(R), "of", len(A))
 
 print("\nPart B: real trisomies"); nulls = {}
 for line in SRR:

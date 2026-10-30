@@ -185,3 +185,13 @@
   P5 CSES22 12p/12q and CSES21 21q (G-banding trisomies): estimate >= 0.7, upper bound = 1.0.
   P6 null arms (about 190, five lines, known gains excluded): at most 8 with lower bound > 0.1 (95% CIs allow ~2.5% one-sided exceedance by chance).
 - Failure rule: overall coverage < 75% means the CI is wrong, and it will not be added to the CLI.
+
+## Clone-fraction fix (written BEFORE rerunning; reps=3)
+- Changes: (1) curve max < 0.15 -> f_hat/f_lo/f_hi = NaN, note UNRESOLVABLE_NOISY_SAMPLE; (2) CI includes curve spread: f_lo from the 80th-percentile curve, f_hi from the 20th.
+- Predictions:
+  Q1 CSES7: every spike-in run unresolved (its curve max was 0.007). Zero numeric estimates, so no wrong ones.
+  Q2 coverage among resolved runs >= 85% (CSES9, HUES14; n about 72).
+  Q3 median CI width at f >= 0.5 in CSES9/HUES14 grows (previously 0.2-0.4); expect 0.3-0.6.
+  Q4 real trisomies: CSES22 12p/12q f_lo >= 0.5 and f_hi = 1; CSES21 21q resolved with f_hi = 1.
+  Q5 null arms: at most 4 with f_lo > 0.1 across the five lines, none above 0.3.
+- Failure rule: coverage < 75% -> the interval is wrong; do not add it to the CLI.
