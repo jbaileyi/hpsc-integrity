@@ -245,3 +245,13 @@
   9q can only be judged on the allelic-ratio plot, and the README will say eSNP's LOH tools exist and were not run.
 - Bias to state: the allelic input is nearly identical (same depth and minor-allele thresholds), so differences are in summarisation and calling, not data.
 - CaSpER: BAFExtract on our BAMs (hg38), controls and settings as pre-registered. Calls read from its segment output at arm level.
+
+## Head-to-head amendment 2 (written BEFORE any plot is made)
+- eSNP input built directly from our bcftools SNP calls (columns chr, position, AD1, AD2, DP = AD1+AD2; X=23, Y=24; other contigs dropped), bypassing EditVCF.
+  MajorMinorCalc(minDP=20, maxDP=1e9, minAF=0.2) is then the same filter as ours, so allelic input is effectively identical.
+- PlotGenome uses hg19 chromosome sizes/centromeres hardcoded; our positions are GRCh38. X-axis offsets are slightly off. Recorded deviation.
+- Blind reading: lines are shuffled with an unseeded RNG into S1..S5; the key is written outside the repo (~/benchmark_key.csv).
+  The reader lists, per image, chromosomes with a visibly raised moving median across most of the chromosome or one arm ("none" allowed), with no threshold.
+  Readings are committed to results/benchmark/esnp_readings.txt BEFORE the key is opened. Limitation: the reader knows two of the five lines are trisomic, so blinding to line identity only partly removes bias.
+- Predictions: the reader marks chr12 in one image and chr21 in another (B1); also marks at least one other chromosome as raised somewhere (hand-reading is generous).
+- CaSpER: not started. Needs hg38 annotation/cytoband and BAFExtract pileups; set up only after the code is read.
