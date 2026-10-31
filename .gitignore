@@ -14,3 +14,4 @@ __pycache__/
 data/hisat2/
 data/bam/
 results/benchmark/esnp_input/
+data/heldout/
