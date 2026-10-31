@@ -289,3 +289,19 @@
   T7 No sample is flagged ALLELIC_POWER_LOW (baseline ratio <= 1.6).
 - Failure rules: T1 failing means high-clone sensitivity does not replicate on real data. Any false GAIN under T5 means the specificity claim fails. All results go in the README either way, with exact binomial intervals on the karyotype fractions.
 - Limits: 3 lines, a handful of passages; RNA-seq and karyotype cultures may not be the same split; karyotype counts have their own sampling error.
+
+## Held-out protocol 2: HipSci open RNA-seq, specificity-first (written BEFORE selection or any alignment; tool frozen at v0.0.4)
+- Data: ENA PRJEB7388 (HipSci iPSC RNA-seq, paired-end 75 bp). Lines matching ^HPSI\d{4}i-[a-z]{4}_\d+$; one run per line (the one with the most read pairs);
+  lines with < 20,000,000 read pairs excluded (power criterion, set before seeing any result); one line per donor, chosen at random.
+  N = 40 donors, numpy default_rng seed 20261030. Selection script: scripts/heldout_select.py; output results/heldout/selection.csv.
+- Processing deviation (preprocessing only, package and thresholds unchanged): paired-end alignment (hisat2 -1/-2, same GRCh38 index), same bcftools calls as before.
+- Truth: HipSci portal copy-number check against the donor's primary tissue. It is consulted ONLY for lines where the tool calls GAIN. A GAIN call counts as supported if the portal
+  lists a copy-number gain overlapping >= 50% of the called arm's length (length used as a proxy if coordinates are not shown); otherwise it is a false positive.
+- Limits: this measures specificity (and refusal and power behaviour); sensitivity on held-out data is not measured unless a line with an arm-sized gain happens to be drawn.
+  The array check has its own mosaic limit, and gives regions, not clone fractions.
+- Predictions:
+  U1 at most 2 of 40 samples carry an unsupported GAIN call (false-positive sample rate <= 5%).
+  U2 at least 1 sample has an arm refused as het-depleted (long runs of homozygosity in some donors); low confidence.
+  U3 ALLELIC_POWER_LOW (baseline ratio > 1.6) is raised in <= 20% of samples.
+  U4 median kept het SNPs per sample >= 5,000 (replaces an earlier shallower-reads guess, dropped).
+- Failure rule: >= 5 of 40 samples with an unsupported GAIN (> 10%) means the specificity claim does not replicate; reported as such.
