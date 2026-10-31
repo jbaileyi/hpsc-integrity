@@ -264,3 +264,4 @@
 ## Held-out pipeline: first test run
 - One-sample test ran 859 min and failed: both downloads timed out. curl had no timeouts, so it hung. Fixed with timeouts and an md5-verified retry loop.
 - Link measured at ~0.63 MB/s with stalls (partial files: mate 1 reached 775 MB in about an hour, mate 2 crept to 666 MB over 14 h). 70.6 GB would need >30 h of download on one connection. Alignment/SNP steps untested at this point.
+- Bug found in heldout_run.sh: it deleted the partial file on the 15th attempt regardless of state (a good 696 MB partial shrank to 374 MB). Fixed: delete only a complete-size file with a wrong md5 or an oversized file; 400 attempts allowed.
