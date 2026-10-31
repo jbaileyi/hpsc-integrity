@@ -256,3 +256,7 @@
 ## Held-out data search: result
 - Time-course iPSC dataset (Zhang et al., Stem Cell Res Ther 2026): RNA-seq deposited in GSA-Human, accessions HRA012852 and HRA012814. Whether access is open or controlled not yet confirmed.
 - KSCB 20q11.21 lines (Sci Rep 2020): RNA-seq in CODA R001794; access not confirmed.
+
+## Held-out data: GSA-Human HRA012852
+- Accession page exists (human data, empty description); metadata export returned "No valid data!" Access appears restricted or unreleased; no data obtained.
+- Time-course held-out test (protocol in design.md) was planned but not run.
