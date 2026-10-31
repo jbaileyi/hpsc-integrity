@@ -260,3 +260,7 @@
 ## Held-out data: GSA-Human HRA012852
 - Accession page exists (human data, empty description); metadata export returned "No valid data!" Access appears restricted or unreleased; no data obtained.
 - Time-course held-out test (protocol in design.md) was planned but not run.
+
+## Held-out pipeline: first test run
+- One-sample test ran 859 min and failed: both downloads timed out. curl had no timeouts, so it hung. Fixed with timeouts and an md5-verified retry loop.
+- Link measured at ~0.63 MB/s with stalls (partial files: mate 1 reached 775 MB in about an hour, mate 2 crept to 666 MB over 14 h). 70.6 GB would need >30 h of download on one connection. Alignment/SNP steps untested at this point.

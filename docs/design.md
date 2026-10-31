@@ -307,3 +307,6 @@
 - Failure rule: >= 5 of 40 samples with an unsupported GAIN (> 10%) means the specificity claim does not replicate; reported as such.
 
 - Held-out protocol 2, deviation note: bcftools mpileup counts overlapping mates once (default), so per-SNP depth is not directly comparable with the single-end GSE81402 data. Recorded; no threshold changed.
+
+- Held-out protocol 2, analysis-set rule (added BEFORE launching the runs): jobs run in selection order (a random permutation). The analysed set is the longest completed prefix of that order,
+  with K reported, so completion order (which favours small files) cannot select samples. If K < 40, the shortfall is stated in the README and K < 40 changes no threshold.

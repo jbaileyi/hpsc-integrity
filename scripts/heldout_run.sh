@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# One held-out run: download (md5-checked, resumable), align paired-end to GRCh38, call SNPs as in scripts/call_snps.sh.
+# One held-out run: resumable download (retries until md5 matches), paired-end alignment to GRCh38, SNP calls as in scripts/call_snps.sh.
 # Usage (from the repository root): bash scripts/heldout_run.sh ERR1555117
 set -euo pipefail
 r=$1
@@ -8,14 +8,19 @@ mkdir -p $D/fastq $D/bam
 if [ -s "$D/bam/$r.snps.tsv" ]; then echo "$r: already done"; exit 0; fi
 IFS=$'\t' read -r run name u1 u2 m1 m2 < <(awk -F'\t' -v r="$r" '$1==r' $D/jobs.tsv)
 [ -n "${run:-}" ] || { echo "$r: not in jobs.tsv" >&2; exit 1; }
-for i in 1 2; do
-  eval u=\$u$i; eval m=\$m$i
-  f="$D/fastq/${run}_${i}.fastq.gz"
-  if [ ! -s "$f" ] || [ "$(md5sum "$f" | cut -d' ' -f1)" != "$m" ]; then
-    curl -sS -L -C - --retry 5 -o "$f" "https://$u" || curl -sS -L -C - --retry 5 -o "$f" "ftp://$u"
-  fi
-  [ "$(md5sum "$f" | cut -d' ' -f1)" = "$m" ] || { echo "$run: md5 mismatch on mate $i" >&2; exit 1; }
-done
+CURL="curl -sS -L -C - --connect-timeout 30 --speed-limit 100000 --speed-time 60"
+sum() { md5sum "$1" 2>/dev/null | cut -d' ' -f1; }
+fetch() {   # url md5 outfile
+  local url=$1 md5=$2 f=$3 n
+  for n in $(seq 1 30); do
+    if [ -s "$f" ] && [ "$(sum "$f")" = "$md5" ]; then return 0; fi
+    if [ "$n" -eq 15 ]; then rm -f "$f"; fi
+    $CURL -o "$f" "https://$url" || $CURL -o "$f" "ftp://$url" || sleep 10
+  done
+  [ "$(sum "$f")" = "$md5" ] || { echo "$run: md5 still wrong after 30 attempts: $f" >&2; return 1; }
+}
+fetch "$u1" "$m1" "$D/fastq/${run}_1.fastq.gz"
+fetch "$u2" "$m2" "$D/fastq/${run}_2.fastq.gz"
 hisat2 -p 2 -x "$IDX" -1 "$D/fastq/${run}_1.fastq.gz" -2 "$D/fastq/${run}_2.fastq.gz" --no-unal \
   --summary-file "$D/bam/$run.hisat2.txt" | samtools sort -@ 1 -o "$D/bam/$run.bam" -
 samtools index "$D/bam/$run.bam"
