@@ -252,3 +252,7 @@
 - Met: 21q raised in CSES21; 9q raised in both HUES14 and CSES9. Failed: no other arm raised in any line (0 vs predicted >= 1).
 - Window 51 raised 12p, 12q (CSES22), 21q (CSES21), 9q (HUES14, CSES9), nothing in CSES7. Differences from hpsc-integrity: it refuses the two 9q arms; trisomy detection and specificity were equivalent on this input.
 - Not shown: eSNP-Karyotyping's own interpretation or LOH tools, CaSpER.
+
+## Held-out data search: result
+- Time-course iPSC dataset (Zhang et al., Stem Cell Res Ther 2026): RNA-seq deposited in GSA-Human, accessions HRA012852 and HRA012814. Whether access is open or controlled not yet confirmed.
+- KSCB 20q11.21 lines (Sci Rep 2020): RNA-seq in CODA R001794; access not confirmed.

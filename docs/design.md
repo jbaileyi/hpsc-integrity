@@ -273,3 +273,19 @@
 - Primary result (window 151) is final and logged. This run changes only the window (51) and is labelled post-hoc exploratory, since it was chosen after seeing the primary result.
 - Predictions: 21q raised in CSES21 (S2); 9q raised in both HUES14 and CSES9; at least 1 other arm raised across the five images (a smaller window is noisier).
 - Failure of these predictions is reported the same way.
+
+## Held-out protocol: iPSC passage time course (written BEFORE data access; tool frozen at v0.0.4)
+- Data: Zhang et al. 2026, GSA-Human HRA012852/HRA012814 (access pending). iPSC#1-3, P10-P50, PE150 RNA-seq. Use only passages present in the deposit; report the full set.
+- Truth (karyotype, 50 metaphases, as published): iPSC#3 +12: P10 0, P20 14/50, P30 46/50, P40 100%, P50 100%; iPSC#3 dup 20q11.2-q13.3: P30 0, P40 39/52, P50 60/60;
+  iPSC#2 dup chr17 3/50 at P40 (OGM: 17q 40.56-74.17 Mb); iPSC#1 dup chr5 3/51 at P50. The line carrying the 3.4 Mb chr20 gain is inconsistent in the paper: not scored.
+- Processing deviations (preprocessing only, package unchanged): paired-end reads aligned with hisat2 -1/-2 on the same GRCh38 index, same bcftools calls as before. No threshold or code change.
+- Predictions (T3 and T7 low confidence):
+  T1 iPSC#3 12p and 12q are GAIN at P30, P40, P50.
+  T2 iPSC#3 chr12 at P20 (28%) is not GAIN, and its f_hi is >= 0.28 (the tool does not exclude the true fraction).
+  T3 iPSC#3 chr12 at P10 is not GAIN.
+  T4 chr12 clone-fraction interval [f_lo, f_hi] contains the karyotype fraction at >= 2 of P30, P40, P50.
+  T5 No GAIN on any arm other than 12p/12q (iPSC#3 P30-P50), 20q (iPSC#3 P40-P50) and 17q (iPSC#2), across all samples; zero false GAINs on documented-normal arms.
+  T6 iPSC#3 20q (dup covers about half the arm, so the arm-level ratio is diluted) is not GAIN at P40; the P50 outcome is not predicted.
+  T7 No sample is flagged ALLELIC_POWER_LOW (baseline ratio <= 1.6).
+- Failure rules: T1 failing means high-clone sensitivity does not replicate on real data. Any false GAIN under T5 means the specificity claim fails. All results go in the README either way, with exact binomial intervals on the karyotype fractions.
+- Limits: 3 lines, a handful of passages; RNA-seq and karyotype cultures may not be the same split; karyotype counts have their own sampling error.
