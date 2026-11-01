@@ -8,10 +8,16 @@ from hpsc_integrity.annotation import load_reference
 genes, arms = load_reference()
 sel = pd.read_csv("results/heldout/selection.csv")
 calls, qcs, failed = [], [], []
+# Protocol rule (docs/design.md): analyse the longest completed PREFIX of the selection order, report K.
+K = 0
+for r in sel.itertuples():
+    if not Path(f"data/heldout/bam/{r.run_accession}.snps.tsv").exists():
+        break
+    K += 1
+print(f"analysis set: first {K} of {len(sel)} selected samples (longest completed prefix of the selection order)")
+sel = sel.iloc[:K]
 for r in sel.itertuples():
     p = Path(f"data/heldout/bam/{r.run_accession}.snps.tsv")
-    if not p.exists():
-        failed.append((r.sample_alias, "NO_SNP_FILE")); continue
     try:
         c, q = run_allelic([f"{r.sample_alias}={p}"], genes, arms)
     except ValueError as e:
@@ -23,9 +29,9 @@ if not calls:
     raise SystemExit(f"nothing analysed; failures: {failed[:5]}")
 C, Q = pd.concat(calls, ignore_index=True), pd.concat(qcs, ignore_index=True)
 C.to_csv(out / "calls_long.csv", index=False); Q.to_csv(out / "sample_qc.csv", index=False)
-n = len(sel)
+n = K
 g = C[C.call == "GAIN"]
-print(f"analysed {len(Q)} of {n} selected samples; not analysed: {len(failed)}")
+print(f"analysed {len(Q)} of K={n} samples in the prefix; unassessable (reported, kept in the denominator): {len(failed)}")
 print("samples with >= 1 GAIN:", g["sample"].nunique())
 print(g[["sample", "arm", "log2", "ci_lo", "ci_hi", "n_snps"]].to_string(index=False) if len(g) else "no GAIN calls")
 ref = C[C.call == "REFUSED_HET_DEPLETED"]

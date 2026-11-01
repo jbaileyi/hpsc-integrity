@@ -310,3 +310,6 @@
 
 - Held-out protocol 2, analysis-set rule (added BEFORE launching the runs): jobs run in selection order (a random permutation). The analysed set is the longest completed prefix of that order,
   with K reported, so completion order (which favours small files) cannot select samples. If K < 40, the shortfall is stated in the README and K < 40 changes no threshold.
+
+- Held-out protocol 2, stopping rule (added BEFORE any held-out calls were viewed): the analysis is run once, at the earlier of (a) all 40 samples complete, or (b) 2026-11-02 23:00 PDT.
+  K is the longest completed prefix of the selection order at that moment. No calls, GAIN counts or plots are inspected before then. If K < 40 the README states K.
