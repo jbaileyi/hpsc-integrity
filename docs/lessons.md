@@ -273,7 +273,7 @@
 
 ## Held-out HipSci check, results against predictions (K = 12 of 40; prefix of the pre-registered selection order)
 - One GAIN: HPSI0314i-qonc_1, 1q, log2 +0.338 [0.254, 0.431], 583 SNPs; not shown to be supported: the HipSci check lists one region different from the donor's tissue in this line (none in its sibling line), but its coordinates and type did not establish a gain over at least half of 1q, so the pre-specified rule counts it as unsupported.
-- U1 {u1}. U2 FAILED (0 refusals in 12 samples; refusal logic not exercised on held-out data). U3 MET (0/12 ALLELIC_POWER_LOW). U4 MET (median kept het SNPs 10,148; min 4,727).
+- U1 FAILED as scaled (1 of 12 = 8.3% > 5%); failure rule (> 10%) not triggered. U2 FAILED (0 refusals in 12 samples; refusal logic not exercised on held-out data). U3 MET (0/12 ALLELIC_POWER_LOW). U4 MET (median kept het SNPs 10,148; min 4,727).
 - Arm-test mix: NORMAL 48%, UNDERPOWERED 35%, TOO_FEW_SNPS 16%, GAIN 0.2%. Less underpowered than the development lines (55-81%); cause untested (cleaner reads are one candidate).
 - Sensitivity analysis (cutoff as written): excluding the one below-cutoff sample in the prefix (position 5) leaves 1 GAIN in 11 samples.
 - K = 12 because the machine could not stay on; the pre-registered rule was replaced before any calls were viewed (design.md). First analysis run crashed at a print line after writing outputs (pandas attribute clash) and was rerun unchanged.
