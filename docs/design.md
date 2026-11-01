@@ -313,3 +313,8 @@
 
 - Held-out protocol 2, stopping rule (added BEFORE any held-out calls were viewed): the analysis is run once, at the earlier of (a) all 40 samples complete, or (b) 2026-11-02 23:00 PDT.
   K is the longest completed prefix of the selection order at that moment. No calls, GAIN counts or plots are inspected before then. If K < 40 the README states K.
+
+- Held-out protocol 2, CORRECTION (written BEFORE any held-out calls were viewed): ENA read_count counts reads (both mates), not pairs (confirmed: ERR1837003 read_count 77,434,944 vs 38,717,472 pairs in the HISAT2 summary).
+  The "20,000,000 read pairs" cutoff in the protocol was therefore applied as 20,000,000 reads (10,000,000 pairs) in scripts/heldout_select.py; it excluded no line.
+  The selection (seed 20261030) is kept as drawn. Primary analysis: all K samples in the prefix. Pre-specified sensitivity analysis: the subset of those K with >= 40,000,000 reads (20,000,000 pairs), i.e. the cutoff as written. Both are reported.
+  The earlier statement that these samples are about twice as deep as the GSE81402 lines was wrong; depth is comparable.
