@@ -36,7 +36,7 @@ print("samples with >= 1 GAIN:", g["sample"].nunique())
 print(g[["sample", "arm", "log2", "ci_lo", "ci_hi", "n_snps"]].to_string(index=False) if len(g) else "no GAIN calls")
 ref = C[C.call == "REFUSED_HET_DEPLETED"]
 print("refused arms:", ref.arm.value_counts().to_dict(), "| samples with a refusal:", ref["sample"].nunique())
-print("ALLELIC_POWER_LOW:", int((Q.flags != "").sum()), "of", len(Q))
+print("ALLELIC_POWER_LOW:", int((Q["flags"] != "").sum()), "of", len(Q))
 print("kept het SNPs per sample: median", int(Q.het_snps_kept.median()), "min", int(Q.het_snps_kept.min()), "max", int(Q.het_snps_kept.max()))
 print("arm-test mix:", C.call.value_counts(normalize=True).round(3).to_dict())
 print("not analysed:", failed[:10])
