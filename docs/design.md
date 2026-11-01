@@ -318,3 +318,7 @@
   The "20,000,000 read pairs" cutoff in the protocol was therefore applied as 20,000,000 reads (10,000,000 pairs) in scripts/heldout_select.py; it excluded no line.
   The selection (seed 20261030) is kept as drawn. Primary analysis: all K samples in the prefix. Pre-specified sensitivity analysis: the subset of those K with >= 40,000,000 reads (20,000,000 pairs), i.e. the cutoff as written. Both are reported.
   The earlier statement that these samples are about twice as deep as the GSE81402 lines was wrong; depth is comparable.
+
+- Held-out protocol 2, FINAL stopping rule (written BEFORE any held-out calls were viewed): the wall-clock deadline is dropped (the machine could not stay on; project time ran out).
+  The analysis is run once on the first K = 12 samples of the selection order, the longest completed prefix at this moment (computed from file existence only). K is not changed after viewing results.
+  With K < 40 the false-positive bound is wide: 0 false GAINs in 12 samples gives a one-sided 95% upper bound of about 22%.
