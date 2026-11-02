@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "hpsc-integrity: chromosome-arm screening of human pluripotent stem cell RNA-seq (research prototype)"
+type: software
+version: 0.0.5
+date-released: 2026-11-01
+license: MIT
+repository-code: "https://github.com/jbaileyi/hpsc-integrity"
+authors:
+  - given-names: Bailey
+    family-names: Johnson
+abstract: >-
+  Python package and CLI that combines expression-based chromosome-arm tiers with allelic-imbalance
+  evidence from heterozygous SNPs in bulk RNA-seq of human pluripotent stem cells. Validated in-sample on five
+  hESC lines and checked for specificity on 12 held-out HipSci lines; sensitivity and clone-fraction accuracy
+  are not validated on held-out data. See the README for limitations.
+keywords:
+  - pluripotent stem cells
+  - RNA-seq
+  - copy number
+  - allelic imbalance
+  - karyotype
