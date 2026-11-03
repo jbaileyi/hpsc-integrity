@@ -43,6 +43,10 @@ This tests a rule written for the comparison, not eSNP-Karyotyping's own plot in
 
 The frozen tool (v0.0.4, no threshold changes) was run on 12 HipSci iPSC lines drawn at random, one per donor, from the open RNA-seq in ENA study PRJEB7388 (selection rule, seed and predictions committed before any alignment: `docs/design.md`). Only 12 of the planned 40 were processed, because the processing machine could not stay on; the stopping rule was replaced before any calls were viewed. One of the 12 had a GAIN call (HPSI0314i-qonc_1, 1q); it was not shown to be supported: the HipSci check lists one region different from the donor's tissue in this line (none in its sibling line), but its coordinates and type did not establish a gain over at least half of 1q, so the pre-specified rule counts it as unsupported. That is 1 of 12 samples with an unsupported or false-positive call (one-sided 95% upper bound about 34%), so this is a small check, not a precise specificity estimate. No sample was refused as het-depleted, so the refusal logic was not tested here. This check does not measure sensitivity or clone-fraction accuracy.
 
+## Archive and citation
+
+Release v0.0.5 is archived on Zenodo: https://doi.org/10.5281/zenodo.23910632. Citation metadata is in `CITATION.cff`. This is a research prototype; the archive records the exact code and results, and does not indicate external validation.
+
 ## Development record
 
 Predictions were written to `docs/design.md` before each experiment, and results, including failures, are in `docs/lessons.md`.

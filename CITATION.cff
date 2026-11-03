@@ -6,6 +6,7 @@ version: 0.0.5
 date-released: 2026-11-01
 license: MIT
 repository-code: "https://github.com/jbaileyi/hpsc-integrity"
+doi: 10.5281/zenodo.23910632
 authors:
   - given-names: Bailey
     family-names: Johnson
